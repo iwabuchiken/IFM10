@@ -4,6 +4,7 @@ package ifm10.main;
 import java.io.File;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,13 +21,15 @@ public class MainActv extends Activity {
 		// Log
 		Log.d("[" + "MainActv.java : "
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "YES");
+				+ "]", "YES!!!");
 		
 		// Log
 		Log.d("[" + "MainActv.java : "
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]",
 			"message" + StringUtils.join(new String[]{"/data/data/ifm9.main/databases", "trillion"}, File.separator));
+		
+//		DefaultHttpClient httpclient = new DefaultHttpClient();
 	}
 
 	@Override

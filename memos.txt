@@ -1,5 +1,6 @@
 a
 pushd C:\WORKS\WS\WS_Android_20130619_090924\IFM10 && gitk
+a p && pushd C:\WORKS\WS\WS_Android_20130619_090924\IFM10 && gitk
 
 pushd C:\WORKS\WS\WS_Android_20130619_090924\IFM10
 gitk
@@ -17,6 +18,8 @@ copy ..\ImageFileManager6\.gitignore .
 g init
 g a .
 gitk
+
+g p origin master
 
 git remote add origin git@github.com:iwabuchiken/ImageFileManager9.git
 

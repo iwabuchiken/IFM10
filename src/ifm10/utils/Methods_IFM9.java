@@ -1,0 +1,94 @@
+package ifm10.utils;
+
+import ifm9.items.TI;
+import ifm9.main.MainActv;
+import ifm9.main.R;
+import ifm9.tasks.TaskFTP;
+import ifm9.tasks.TaskHTTP;
+import android.app.Activity;
+import android.app.Dialog;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
+
+public class Methods_IFM9 {
+
+	public static boolean
+	delete_TI(Activity actv, TI ti) {
+		// TODO Auto-generated method stub
+		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+				
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		/*----------------------------
+		 * 2. Query
+			----------------------------*/
+		String tableName = ti.getTable_name();
+		
+		if (tableName == null) {
+		
+			tableName = "IFM9";
+			
+		}//if (tableName == null)
+		
+//		String sql = "DELETE FROM " + ti.getTable_name() +
+		String sql = "DELETE FROM " + tableName +
+							" WHERE " + CONS.cols[0] + " = " + ti.getFileId();
+		
+		try {
+			wdb.execSQL(sql);
+
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "TI item deleted from db: " + ti.getFile_name());
+		
+			/*----------------------------
+			 * 3. Dismiss dialogues
+				----------------------------*/
+			wdb.close();
+			
+			return true;
+
+		} catch (SQLException e) {
+			
+			// Log
+			Log.e("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "TI item deletion => Failed:  " + ti.getFile_name());
+			
+			wdb.close();
+			
+			return false;
+			
+		}
+		
+	}//delete_TI(Activity actv, Dialog dlg1, Dialog dlg2, TI ti)
+
+	
+	public static int
+	postFileNameToLollipopSite(Activity actv, TI ti) {
+		
+		TaskHTTP task = new TaskHTTP(actv, ti);
+		
+		task.execute(actv.getString(R.string.http_post_file_name_lollipop));
+
+		
+		return 1;
+	}//postFileNameToLollipopSite(Activity actv, TI ti)
+	
+
+
+	public static Integer postFileNameToRailsSite(Activity actv, TI ti) {
+		
+		TaskHTTP task = new TaskHTTP(actv, ti);
+		
+		task.execute(actv.getString(R.string.http_post_image_data_rails));
+
+		
+		return null;
+	}
+
+}//public class Methods_IFM9
