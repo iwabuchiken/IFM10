@@ -1396,11 +1396,79 @@ public class MainActv extends ListActivity {
 	}//protected void onStart()
 
 	private void debugs() {
-		// TODO Auto-generated method stub
+		
 //		debug_master_v3_0__SetupDB();
 		
 //		debug_master_v3_2__CreateSubDirs();
-	}
+		
+		debug_master_v4_2__ChangeTableNames();
+//		debug_master_v4_2_e2_t1__RestoreDBFile();
+		
+		
+	}//private void debugs() {
+
+	private void debug_master_v4_2_e2_t1__RestoreDBFile() {
+		
+		String src = "/mnt/sdcard-ext/IFM10_backup/ifm10_backup_20130620_165036.bk";
+		String dst = StringUtils.join(new String[]{"/data/data/ifm10.main/databases", MainActv.dbName}, File.separator);
+		
+//		String dst = "/data/data/ifm9.main/databases" + MainActv.dbName;
+		boolean res = Methods.restore_db(this, MainActv.dbName, src, dst);
+		
+		// Log
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "res=" + res);
+		
+	}//private void debug_master_v4_2_e2_t1__RestoreDBFile() {
+
+	private void debug_master_v4_2__ChangeTableNames() {
+		
+		List<String> tnames = Methods.get_table_list(this, "IFM9%");
+		
+		
+		
+		DBUtils dbu = new DBUtils(this, MainActv.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+
+		int counter = 0;
+		
+		for (int i = 0; i < tnames.size(); i++) {
+			
+			String tname = tnames.get(i);
+			
+			//REF http://stackoverflow.com/questions/426495/how-do-you-rename-a-table-in-sqlite-3-0 answered Jan 8 '09 at 23:41
+//			String sql = "ALTER TABLE " + tname + " RENAME TO " + tname.replace("IFM9", "IFM10");
+			String sql = "ALTER TABLE " + tname + " RENAME TO " + tname.replaceFirst("IFM9", "IFM10");
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "sql=" + sql);
+			
+			wdb.execSQL(sql);
+			
+//			String sql = "ALTER TABLE ? RENAME TO ?";
+//			
+//			String[] args = new String[]{tname, tname.replace("IFM9", "IFM10")};
+////			String[] args = {tname, tname.replace("IFM9", "IFM10")};
+//			
+//			wdb.execSQL(sql, args);
+			
+			counter += 1;
+			
+		}//for (int i = 0; i < tnames.size(); i++)
+		
+		wdb.close();
+		
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "Renaming => Done: " + counter + " item(s)");
+		
+	}//private void debug_master_v4_2__ChangeTableNames() {
 
 	/*********************************
 	 * @return true => <br>

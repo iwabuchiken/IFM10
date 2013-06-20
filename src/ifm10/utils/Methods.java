@@ -995,8 +995,9 @@ public class Methods {
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //				+ "]", "tableName => " + tableName);
 		
-		
-		return tableName.replace("IFM10", "IFM9");
+		//REF http://stackoverflow.com/questions/5754363/android-how-to-replace-part-of-a-string-by-another-string answered Apr 22 '11 at 
+//		return tableName.replace("IFM10", "IFM9");
+		return tableName;
 	}//public static String convert_path_into_table_name(Activity actv)
 
 	public static String convert_path_into_table_name(Activity actv, String newPath) {
