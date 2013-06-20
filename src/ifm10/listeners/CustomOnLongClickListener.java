@@ -1,7 +1,7 @@
 package ifm10.listeners;
 
-import ifm9.main.TNActv;
-import ifm9.utils.Tags.ItemTags;
+import ifm10.main.TNActv;
+import ifm10.utils.Tags.ItemTags;
 import android.app.Activity;
 import android.view.View;
 import android.view.View.OnLongClickListener;

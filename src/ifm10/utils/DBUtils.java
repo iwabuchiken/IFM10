@@ -1,14 +1,14 @@
 package ifm10.utils;
 
 
-import ifm9.items.TI;
-import ifm9.main.MainActv;
+
+import ifm10.items.TI;
+import ifm10.main.MainActv;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,16 +16,8 @@ import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.MediaStore;
 import android.util.Log;
 //import android.view
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.Button;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /****************************************

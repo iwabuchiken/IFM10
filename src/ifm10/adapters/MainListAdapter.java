@@ -1,14 +1,13 @@
 package ifm10.adapters;
 
+import ifm10.listeners.ListOnTouchListener;
+import ifm10.main.MainActv;
+import ifm10.main.R;
+import ifm10.utils.Methods;
+import ifm10.utils.Tags;
+
 import java.util.List;
 
-import ifm9.items.TI;
-import ifm9.listeners.ListOnTouchListener;
-import ifm9.main.MainActv;
-import ifm9.main.R;
-import ifm9.utils.Methods;
-import ifm9.utils.Tags;
-import ifm9.utils.Tags.ListTags;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;

@@ -1,7 +1,6 @@
 package ifm10.listeners.dialog;
 
-import ifm9.utils.Methods;
-import ifm9.utils.Tags;
+import ifm10.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;

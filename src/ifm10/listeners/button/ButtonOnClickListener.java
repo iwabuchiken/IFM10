@@ -1,13 +1,12 @@
 package ifm10.listeners.button;
 
-import ifm9.items.TI;
-import ifm9.main.ImageActv;
-import ifm9.main.MainActv;
-import ifm9.main.R;
-import ifm9.main.TNActv;
-import ifm9.utils.CONS;
-import ifm9.utils.Methods;
-import ifm9.utils.Tags;
+import ifm10.items.TI;
+import ifm10.main.ImageActv;
+import ifm10.main.MainActv;
+import ifm10.main.TNActv;
+import ifm10.utils.CONS;
+import ifm10.utils.Methods;
+import ifm10.utils.Tags;
 
 import java.io.File;
 

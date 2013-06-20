@@ -1,8 +1,7 @@
 package ifm10.listeners.button;
 
-import ifm9.main.R;
-import ifm9.utils.Methods;
-import ifm9.utils.Tags;
+import ifm10.main.R;
+import ifm10.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;

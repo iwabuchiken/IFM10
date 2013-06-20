@@ -1,5 +1,9 @@
 package ifm10.tasks;
 
+import ifm10.items.TI;
+import ifm10.main.R;
+import ifm10.utils.CONS;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -19,9 +23,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ifm9.items.TI;
-import ifm9.main.R;
-import ifm9.utils.CONS;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;

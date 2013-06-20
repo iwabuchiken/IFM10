@@ -1,7 +1,7 @@
 package ifm10.tasks;
 
-import ifm9.main.MainActv;
-import ifm9.utils.Methods;
+import ifm10.main.MainActv;
+import ifm10.utils.Methods;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;

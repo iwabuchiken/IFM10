@@ -1,22 +1,17 @@
 package ifm10.utils;
 
 
-import ifm9.items.TI;
-import ifm9.listeners.CustomOnItemLongClickListener;
-import ifm9.listeners.dialog.DialogButtonOnClickListener;
-import ifm9.listeners.dialog.DialogButtonOnTouchListener;
-import ifm9.listeners.dialog.DialogListener;
-import ifm9.listeners.dialog.DialogOnItemClickListener;
-import ifm9.listeners.dialog.DialogOnItemLongClickListener;
-import ifm9.main.FTPActv;
-import ifm9.main.MainActv;
-import ifm9.main.PrefActv;
-import ifm9.main.R;
-import ifm9.main.TNActv;
-import ifm9.tasks.RefreshDBTask;
-import ifm9.tasks.SearchTask;
-import ifm9.tasks.TaskFTP;
-import ifm9.utils.Tags.DialogTags;
+
+import ifm10.items.TI;
+import ifm10.listeners.dialog.DialogButtonOnClickListener;
+import ifm10.listeners.dialog.DialogButtonOnTouchListener;
+import ifm10.listeners.dialog.DialogOnItemClickListener;
+import ifm10.listeners.dialog.DialogOnItemLongClickListener;
+import ifm10.main.MainActv;
+import ifm10.main.R;
+import ifm10.main.TNActv;
+import ifm10.tasks.TaskFTP;
+import ifm10.utils.Tags.DialogTags;
 
 import java.io.BufferedWriter;
 import java.io.File;

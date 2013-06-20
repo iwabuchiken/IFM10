@@ -1,17 +1,17 @@
 package ifm10.listeners.dialog;
 
+import ifm10.items.TI;
+import ifm10.main.R;
+import ifm10.tasks.RefreshDBTask;
+import ifm10.tasks.TaskFTP;
+import ifm10.tasks.Task_add_table_name;
+import ifm10.utils.CONS;
+import ifm10.utils.Methods;
+import ifm10.utils.Methods_dlg;
+import ifm10.utils.Tags;
+
 import java.util.List;
 
-import ifm9.items.TI;
-import ifm9.main.MainActv;
-import ifm9.main.R;
-import ifm9.tasks.RefreshDBTask;
-import ifm9.tasks.TaskFTP;
-import ifm9.tasks.Task_add_table_name;
-import ifm9.utils.CONS;
-import ifm9.utils.Methods;
-import ifm9.utils.Methods_dlg;
-import ifm9.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;

@@ -1,20 +1,17 @@
 package ifm10.adapters;
 
+import ifm10.items.TI;
+import ifm10.listeners.CustomOnLongClickListener;
+import ifm10.listeners.button.ButtonOnClickListener;
+import ifm10.main.MainActv;
+import ifm10.main.R;
+import ifm10.main.TNActv;
+import ifm10.utils.CONS;
+import ifm10.utils.Tags;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import ifm9.items.TI;
-import ifm9.listeners.CustomOnLongClickListener;
-import ifm9.listeners.button.ButtonOnClickListener;
-import ifm9.main.MainActv;
-import ifm9.main.R;
-import ifm9.main.TNActv;
-import ifm9.utils.CONS;
-import ifm9.utils.Methods;
-import ifm9.utils.Tags;
-import ifm9.utils.Tags.ButtonTags;
-import ifm9.utils.Tags.ItemTags;
-import ifm9.utils.CONS.MoveMode;
 
 import android.app.Activity;
 import android.content.ContentResolver;

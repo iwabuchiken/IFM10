@@ -1,7 +1,8 @@
 package ifm10.utils;
 
-import ifm9.items.TI;
-import ifm9.main.MainActv;
+
+import ifm10.items.TI;
+import ifm10.main.MainActv;
 
 import java.io.File;
 import java.io.FileInputStream;
