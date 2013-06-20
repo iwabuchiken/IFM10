@@ -19,6 +19,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.SocketException;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
@@ -5458,6 +5460,98 @@ public class Methods {
 		return sdf1.format(new Date(millSec));
 		
 	}//public static String get_TimeLabel(long millSec)
+
+	/*********************************
+	 * @return true => Log written<br>
+	 * 			false => Output failed
+	 *********************************/
+	public static boolean writeLog(String message, String header) {
+		/*********************************
+		 * Build a File object
+		 * Validate
+		 * Write log
+		 *********************************/
+		String fpath_Log = StringUtils.join(
+								new String[]{
+										CONS.Admin.dpath_Log,
+										CONS.Admin.fname_log
+								},
+								File.separator
+							);
+		
+		File f = new File(fpath_Log);
+		
+		
+		/*********************************
+		 * Validate
+		 *********************************/
+		// If the log file doesn't exist, create one
+		if (!f.exists()) {
+			
+			try {
+				
+				boolean res = f.createNewFile();
+				
+			} catch (IOException e) {
+				
+				// Log
+				Log.d("["
+						+ "Methods.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "Create log file => Failed");
+				
+				return false;
+				
+			}
+			
+		} else {//if (!f.exists())
+			
+			// Log
+			Log.d("["
+					+ "Methods.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "Log file exists: " + f.getAbsolutePath());
+			
+		}//if (!f.exists())
+		
+		/*********************************
+		 * Write log
+		 *********************************/
+		FileOutputStream fos = null;
+		
+		try {
+			
+			fos = new FileOutputStream(f);
+			
+			fos.write(new String(header + " " + message).getBytes());
+			
+			fos.close();
+			
+		} catch (FileNotFoundException e) {
+			
+			// Log
+			Log.d("["
+					+ "Methods.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", e.toString());
+			
+			return false;
+			
+		} catch (IOException e) {
+
+			// Log
+			Log.d("["
+					+ "Methods.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", e.toString());
+			
+			return false;
+			
+		}
+		
+		return true;
+		
+	}//public static boolean writeLog(String message, String header) {
 
 }//public class Methods
 

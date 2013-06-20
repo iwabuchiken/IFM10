@@ -1,5 +1,8 @@
 package ifm10.utils;
 
+import java.io.File;
+
+import ifm10.main.MainActv;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.MediaStore;
 
@@ -154,5 +157,17 @@ public class CONS {
 		
 		
 	}
-	
+
+	public static class Admin {
+		
+		public static
+		String dpath_Log = MainActv.dirName_ExternalStorage
+							+ File.separator
+							+ "IFM10_log";
+		
+		public static
+		String fname_log = "ifm10.log";
+		
+	}//public static class Admin {
+
 }

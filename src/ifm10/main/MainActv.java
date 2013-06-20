@@ -21,6 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -1396,8 +1397,225 @@ public class MainActv extends ListActivity {
 
 	private void debugs() {
 		// TODO Auto-generated method stub
-		debug_master_v3_0__SetupDB();
+//		debug_master_v3_0__SetupDB();
+		
+		debug_master_v3_2__CreateSubDirs();
 	}
+
+	/*********************************
+	 * @return true => <br>
+	 * 			false => Can't get table names list, or the size of the list being less than 1
+	 *********************************/
+	private boolean debug_master_v3_2__CreateSubDirs() {
+		/*********************************
+		 * Get => Table names list
+		 * Build => dir paths
+		 * 
+		 * Create => Subdirs using the newly-created subdir paths
+		 *********************************/
+		List<String> tnames = Methods.get_table_list(this, "IFM9%");
+		
+		if (tnames == null) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "tnames == null");
+			
+			return false;
+			
+		} else if (tnames.size() < 1) {//if (tnames == null)
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "tnames.size < 1");
+			
+			return false;
+			
+		}//if (tnames == null)
+		
+		for (int i = 0; i < tnames.size(); i++) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "table name=" + tnames.get(i));
+			
+		}//for (int i = 0; i < tnames.size(); i++)
+		
+		/*********************************
+		 * Build => dir paths
+		 *********************************/
+		List<String> dirPaths = new ArrayList<String>();
+		
+		for (int i = 0; i < tnames.size(); i++) {
+			
+			String[] tnameSplit = tnames.get(i).split("__");
+			
+			String dpath_Each = null;
+			
+			if (tnameSplit.length > 1) {
+				
+				dpath_Each = StringUtils.join(
+								Arrays.copyOfRange(tnameSplit, 1, tnameSplit.length)
+								,
+								File.separator);
+				
+			} else {//if (tnameSplit.length > 1)
+				
+				dpath_Each = tnameSplit[0];
+				
+			}//if (tnameSplit.length > 1)
+			
+			
+			String dpaths = StringUtils.join(
+								new String[]{
+										MainActv.dirPath_base,
+										dpath_Each
+								},
+								File.separator);
+
+//			// Log
+//			Log.d("["
+//					+ "MainActv.java : "
+//					+ +Thread.currentThread().getStackTrace()[2]
+//							.getLineNumber() + "]", "dpath_Each=" + dpath_Each);
+//			
+//			// Log
+//			Log.d("["
+//					+ "MainActv.java : "
+//					+ +Thread.currentThread().getStackTrace()[2]
+//							.getLineNumber() + "]", "dpaths=" + dpaths);
+			
+			// Add path to the list
+			dirPaths.add(dpaths);
+			
+		}//for (int i = 0; i < tnames.size(); i++)
+		
+//		// Log
+//		Log.d("[" + "MainActv.java : "
+//				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]",
+//				"dirPaths.size()=" + dirPaths.size()
+//				+ "(tnames.size=" + tnames.size() + ")");
+		
+		/*********************************
+		 * Create => Subdirs using the newly-created subdir paths
+		 *********************************/
+		for (int i = 0; i < dirPaths.size(); i++) {
+			
+			String fullPath = dirPaths.get(i);
+			
+			File f = new File(fullPath);
+			
+			if (f.exists()) {		// Folder exists
+				// If the folder exists, then validate if the file "list.txt" also exists
+				String listPath = StringUtils.join(
+									new String[]{
+											fullPath,
+											MainActv.listFileName
+									},
+									File.separator); 
+				
+				File listFile = new File(listPath);
+				
+				if (listFile.exists()) {
+					
+				} else {//if (listFile.exists())	// The folder exists, but the list file doesn't
+													// => Hence, create the file "list.txt"
+					
+					boolean res;
+					
+					try {
+						
+						res = listFile.createNewFile();
+						
+						// Log
+						Log.d("["
+								+ "MainActv.java : "
+								+ +Thread.currentThread().getStackTrace()[2]
+										.getLineNumber() + "]",
+								"list.txt => Created in: " + fullPath);
+						
+					} catch (IOException e) {
+						
+						// Log
+						Log.d("["
+								+ "MainActv.java : "
+								+ +Thread.currentThread().getStackTrace()[2]
+										.getLineNumber() + "]",
+								"list.txt => Not created in: " + fullPath);
+						
+					}
+					
+				}//if (listFile.exists())
+				
+				
+			} else {//if (f.exists())		// Folder doesn't exist. Create one.
+				
+				boolean res = f.mkdirs();
+				
+				if (res == true) {			// The folder was created. Now create the list file.
+					
+					String listPath = StringUtils.join(
+							new String[]{
+									fullPath,
+									MainActv.listFileName
+							},
+							File.separator); 
+					
+					File listFile = new File(listPath);
+					
+					try {
+						
+						res = listFile.createNewFile();
+						
+						// Log
+						Log.d("["
+								+ "MainActv.java : "
+								+ +Thread.currentThread().getStackTrace()[2]
+										.getLineNumber() + "]",
+								"list.txt => Created in: " + fullPath);
+						
+						Methods.writeLog(
+									"list.txt => Created in: " + fullPath,
+									"MainActv.java : "
+										+ Thread.currentThread().getStackTrace()[2]
+												.getMethodName()
+										+ ":"
+										+ Thread.currentThread().getStackTrace()[2]
+												.getLineNumber()	
+									);
+						
+					} catch (IOException e) {
+						
+						// Log
+						Log.d("["
+								+ "MainActv.java : "
+								+ Thread.currentThread().getStackTrace()[2]
+										.getLineNumber() + "]",
+								"list.txt => Not created in: " + fullPath);
+						
+					}
+					
+				} else {//if (res)
+					
+				}//if (res)
+				
+				
+			}//if (f.exists())
+			
+			
+		}//for (int i = 0; i < dirPaths.size(); i++)
+		
+		
+		return true;
+		
+	}//private boolean debug_master_v3_2__CreateSubDirs() {
 
 	private void debug_master_v3_0__SetupDB() {
 		/*********************************
