@@ -150,7 +150,7 @@ public class SearchTask extends AsyncTask<String[], Integer, String>{
 		 *********************************/
 //		List<String> table_names = Methods.get_table_list(actv);
 //		List<String> table_names = Methods.get_table_list(actv, "IFM9");
-		List<String> table_names = Methods.get_table_list(actv, "IFM9%");
+		List<String> table_names = Methods.get_table_list(actv, "IFM10%");
 		
 		/*----------------------------
 		 * 2. Construct data

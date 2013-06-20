@@ -85,7 +85,7 @@ public class MainActv extends ListActivity {
 	public static String dirName_ExternalStorage = "/mnt/sdcard-ext";
 
 //	public static String  dirName_base = "IFM8";
-	public static String  dirName_base = "IFM9";
+	public static String  dirName_base = "IFM10";
 //	public static String  dirName_base = "ifm9";
 
 	public static String dirPath_base = dirName_ExternalStorage + File.separator + dirName_base;
@@ -137,13 +137,13 @@ public class MainActv extends ListActivity {
 	public static String tableName_separator = "__";
 
 	// Backup
-	public static String dirPath_db = "/data/data/ifm9.main/databases";
+	public static String dirPath_db = "/data/data/ifm10.main/databases";
 	
 	public static String fileName_db = "ifm9.db";
 
-	public static String dirPath_db_backup = dirName_ExternalStorage + "/IFM9_backup";
+	public static String dirPath_db_backup = dirName_ExternalStorage + "/IFM10_backup";
 	
-	public static String fileName_db_backup_trunk = "ifm9_backup";
+	public static String fileName_db_backup_trunk = "ifm10_backup";
 	public static String fileName_db_backup_ext = ".bk";
 
 	public static String tname_main = "IFM9";
@@ -194,7 +194,7 @@ public class MainActv extends ListActivity {
 			
 			dirPath_base = dirName_ExternalStorage + File.separator + dirName_base;
 			
-			dirPath_db_backup = dirName_ExternalStorage + "/IFM9_backup";
+			dirPath_db_backup = dirName_ExternalStorage + "/IFM10_backup";
 			
 		}//if (device_name == condition)
 		
@@ -528,11 +528,11 @@ public class MainActv extends ListActivity {
 				+ "]", "Prefs cleared");
 
 		
-    	String dst = "/data/data/ifm9.main/databases" + MainActv.dbName;
+    	String dst = "/data/data/ifm10.main/databases" + MainActv.dbName;
     	
     	File f = new File(dst);
     	
-    	File db_dir = new File("/data/data/ifm9.main/databases");
+    	File db_dir = new File("/data/data/ifm10.main/databases");
     	
     	for (String name : db_dir.list()) {
 			
@@ -564,7 +564,7 @@ public class MainActv extends ListActivity {
 				+ "]", "Starting: restore_db()");
     	
 		String src = "/mnt/sdcard-ext/IFM9_backup/ifm9_backup_20120929_075009.bk";
-		String dst = StringUtils.join(new String[]{"/data/data/ifm9.main/databases", MainActv.dbName}, File.separator);
+		String dst = StringUtils.join(new String[]{"/data/data/ifm10.main/databases", MainActv.dbName}, File.separator);
 		
 //		String dst = "/data/data/ifm9.main/databases" + MainActv.dbName;
 		boolean res = Methods.restore_db(this, MainActv.dbName, src, dst);
@@ -583,8 +583,8 @@ public class MainActv extends ListActivity {
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "Starting: restore_db()");
     	
-		String src = "/mnt/sdcard-ext/IFM9_backup/" + dbFile_name;
-		String dst = StringUtils.join(new String[]{"/data/data/ifm9.main/databases", MainActv.dbName}, File.separator);
+		String src = "/mnt/sdcard-ext/IFM10_backup/" + dbFile_name;
+		String dst = StringUtils.join(new String[]{"/data/data/ifm10.main/databases", MainActv.dbName}, File.separator);
 		
 //		String dst = "/data/data/ifm9.main/databases" + MainActv.dbName;
 		boolean res = Methods.restore_db(this, MainActv.dbName, src, dst);
@@ -1384,7 +1384,49 @@ public class MainActv extends ListActivity {
 		Log.d("[" + "MainActv.java : "
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "onStart!");
+		
+		debugs();
+		
 	}//protected void onStart()
+
+	private void debugs() {
+		// TODO Auto-generated method stub
+		debug_master_v3_0__SetupDB();
+	}
+
+	private void debug_master_v3_0__SetupDB() {
+		/*********************************
+		 * Steps
+		 * 
+		 * Create => Root dir
+		 *********************************/
+		/*********************************
+		 * Create => Root dir
+		 *********************************/
+		File file = create_root_dir();
+		
+		if (file == null) {
+			Log.e("MainActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "file == null");
+			
+			return;
+		}//if (file == null)
+		
+		/*----------------------------
+		 * 1-2. Create "list.txt"
+			----------------------------*/
+		boolean res = create_list_file(file);
+		
+		if (res == false) {
+			Log.e("MainActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "res == false");
+			
+			return;
+		}//if (res == false)
+
+	}//debug_master_v3_0__SetupDB()
 
 	private void debug_b30() {
 		

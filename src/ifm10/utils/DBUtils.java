@@ -5,6 +5,7 @@ package ifm10.utils;
 import ifm10.items.TI;
 import ifm10.main.MainActv;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -1212,6 +1213,47 @@ public class DBUtils extends SQLiteOpenHelper{
 		}
 		
 	}//public boolean updateData_TI(Activity actv, TI ti)
+
+	public boolean initDB() {
+		/*********************************
+		 * Steps
+		 * 
+		 * Init => Backup folder
+		 *********************************/
+		/*********************************
+		 * Init => Backup folder
+		 *********************************/
+		// TODO Auto-generated method stub
+		File dpath_DBFile = new File(MainActv.dirPath_base);
+		
+		// Log
+		if (dpath_DBFile.exists()) {
+			
+			// Log
+			Log.d("["
+					+ "DBUtils.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "Dir exists: " + dpath_DBFile.getAbsolutePath());
+			
+		} else {//if (dpath_DBFile.exists())
+
+			// Log
+			Log.d("["
+					+ "DBUtils.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]",
+					"Dir doesn't exist: " + dpath_DBFile.getAbsolutePath());
+			
+			// Create dir
+			
+
+		}//if (dpath_DBFile.exists())
+		
+//		SQLiteDatabase rdb = this.getReadableDatabase();
+		
+		return false;
+		
+	}//public void initDB()
 
 }//public class DBUtils
 
