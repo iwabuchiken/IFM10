@@ -28,6 +28,7 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.Vibrator;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -947,6 +948,10 @@ public class MainActv extends ListActivity {
 		
 	}//private void init_prefs_current_path()
 
+	/*********************************
+	 * @return true => File exists or created<br>
+	 * 			false => File not created
+	 *********************************/
 	private boolean create_list_file(File file) {
 		File list_file = new File(file, listFileName);
 		
@@ -1398,11 +1403,307 @@ public class MainActv extends ListActivity {
 		/*********************************
 		 * Steps
 		 * 
-		 * Create => Root dir
+		 * 1. Create => Root dir
+		 * 2. Create => Backup dir
+		 * 
+		 * 3. Create => database dir
+		 * 
+		 * 4. C/P => backup-ed db file
+		 * 
+		 * Backup db
+		 * 
+		 * Create => Sub dirs
 		 *********************************/
+		boolean res = debug_master_v3_0__SetupDB__1_CreateRootAndBackupDirs();
+		
+		if (res == false) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "res == false");
+			
+			return;
+			
+		}//if (res == false)
+
+		/*********************************
+		 * Create => database dir
+		 *********************************/
+		res = debug_master_v3_0__SetupDB__2_CreateDatabseDir();
+		
+		if (res == false) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "res == false");
+			
+			return;
+			
+		}//if (res == false)
+		
+		/*********************************
+		 * 4. C/P => backup-ed db file
+		 *********************************/
+//		res = debug_master_v3_0__SetupDB__3_CopyPasteDBFile();
+//		
+//		if (res == false) {
+//			
+//			// Log
+//			Log.d("["
+//					+ "MainActv.java : "
+//					+ +Thread.currentThread().getStackTrace()[2]
+//							.getLineNumber() + "]", "res == false");
+//			
+//			return;
+//			
+//		}//if (res == false)
+		
+		/*********************************
+		 * Backup db
+		 *********************************/
+		
+		
+		/*********************************
+		 * Create => Sub dirs
+		 *********************************/
+//		dirPath_db_backup
+		
+	}//debug_master_v3_0__SetupDB()
+
+	@SuppressWarnings("resource")
+	private boolean debug_master_v3_0__SetupDB__3_CopyPasteDBFile() {
+		/*********************************
+		 * Build => File paths
+		 * Validate => Files exist?
+		 * Copy
+		 *********************************/
+		String src = StringUtils.join(
+								new String[]{
+										MainActv.dirPath_db_backup,
+										"ifm9_backup_20130617_194313.bk"
+								},
+								File.separator);
+		
+		String dst = StringUtils.join(
+								new String[]{
+										MainActv.dirPath_db,
+										MainActv.dbName
+								},
+								File.separator);
+		
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "src=" + src + "/" + "dst=" + dst);
+		
+		/*********************************
+		 * Validate => Files exist?
+		 *********************************/
+		File f_src = new File(src);
+		File f_dst = new File(dst);
+		
+		if (f_src.exists()) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "f_src => Exists");
+			
+			if (f_dst.exists()) {
+				
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "f_dst => Exists");
+				
+			} else {//if (f_dst.exists())
+				
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "f_dst => Doesn't exist");
+				
+				return false;
+				
+			}//if (f_dst.exists())
+			
+			
+		} else {//if (f_src.exists())
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "f_src => Doesn't exist");
+			
+			return false;
+			
+		}//if (f_src.exists())
+		
+		/*********************************
+		 * Copy
+		 *********************************/
+		try {
+			FileChannel iChannel = new FileInputStream(src).getChannel();
+			FileChannel oChannel = new FileOutputStream(dst).getChannel();
+			iChannel.transferTo(0, iChannel.size(), oChannel);
+			iChannel.close();
+			oChannel.close();
+			
+			// Log
+			Log.d("MainActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]",
+					"File copied from: " + src
+					+ "/ to: " + dst);
+			
+			if (Looper.myLooper() == Looper.getMainLooper()) {
+				
+				// debug
+				Toast.makeText(this, "DB restoration => Done", Toast.LENGTH_LONG).show();
+				
+			} else {//if (condition)
+
+				// Log
+				Log.d("Methods.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "DB restoration => Done");
+				
+			}//if (condition)
+			
+		} catch (FileNotFoundException e) {
+			// Log
+			Log.e("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception: " + e.toString());
+			
+			return false;
+			
+		} catch (IOException e) {
+			// Log
+			Log.e("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception: " + e.toString());
+			
+			return false;
+			
+		}//try
+		
+		
+		
+		return true;
+
+	}//private boolean debug_master_v3_0__SetupDB__3_CopyPasteDBFile() {
+
+	/*********************************
+	 * @return true	=> DB dir exists, or doesn't exist and was created<br>
+	 * 			false => DB dir doesn't exist, and was not created
+	 *********************************/
+	private boolean debug_master_v3_0__SetupDB__2_CreateDatabseDir() {
+		
+		File f = new File(MainActv.dirPath_db);
+		
+		if (f.exists()) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "DB dir exists: " + f.getAbsolutePath());
+			
+			String[] fnames = f.list();
+			
+			if (fnames.length < 1) {
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "No files in: " + f.getAbsolutePath());
+			} else {//if (fnames.length < 1)
+				
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "fnames.length=" + fnames.length);
+				
+				for (int i = 0; i < fnames.length; i++) {
+					
+					// Log
+					Log.d("["
+							+ "MainActv.java : "
+							+ +Thread.currentThread().getStackTrace()[2]
+									.getLineNumber() + "]", "fname=" + fnames[i]);
+					
+				}//for (int i = 0; i < fnames.length; i++)
+				
+			}//if (fnames.length < 1)
+			
+			
+			return true;
+			
+		} else {//if (f.exists())
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "DB dir doesn't exist: " + f.getAbsolutePath());
+			
+			DBUtils dbu = new DBUtils(this, MainActv.dbName);
+			
+			SQLiteDatabase wdb = dbu.getWritableDatabase();
+			
+			
+			wdb.close();
+			
+			if (f.exists()) {
+				
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "DB dir created: " + f.getAbsolutePath());
+				
+				return true;
+
+			} else {//if (f.exists())
+
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "DB dir not created: " + f.getAbsolutePath());
+				
+				return false;
+				
+			}//if (f.exists())
+			
+			
+		}//if (f.exists())
+		
+	}//private boolean debug_master_v3_0__SetupDB__2_CreateDatabseDir() {
+
+	/*********************************
+	 * @return true => Root dir exists or got created. Backup dir also exists or got created.<br>
+	 * 			false => Root dir not created, or the root dir was created but the backup dir was not.
+	 *********************************/
+	private boolean debug_master_v3_0__SetupDB__1_CreateRootAndBackupDirs() {
+
+		boolean res;
+		
 		/*********************************
 		 * Create => Root dir
 		 *********************************/
+		
 		File file = create_root_dir();
 		
 		if (file == null) {
@@ -1410,23 +1711,73 @@ public class MainActv extends ListActivity {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "file == null");
 			
-			return;
+			return false;
 		}//if (file == null)
 		
 		/*----------------------------
 		 * 1-2. Create "list.txt"
 			----------------------------*/
-		boolean res = create_list_file(file);
+		res = create_list_file(file);
 		
 		if (res == false) {
 			Log.e("MainActv.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "res == false");
 			
-			return;
+			return false;
 		}//if (res == false)
 
-	}//debug_master_v3_0__SetupDB()
+		/*********************************
+		 * Create => Backup dir
+		 *********************************/
+		File f = new File(MainActv.dirPath_db_backup);
+		
+		if (f.exists()) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]",
+					"Backup dir exists: " + f.getAbsolutePath());
+			
+		} else {//if (f.exists())
+
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]",
+							"Backup dir doesn't exist: " + f.getAbsolutePath());
+			
+			res = f.mkdir();
+			
+			if (res == true) {
+				
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "Backup dir created: " + f.getAbsolutePath());
+				
+			} else {//if (res == true)
+
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]",
+						"Create backup dir => Failed : " + f.getAbsolutePath());
+				
+				return false;
+				
+			}//if (res == true)
+			
+			
+		}//if (f.exists())
+		
+		return true;
+	}
 
 	private void debug_b30() {
 		

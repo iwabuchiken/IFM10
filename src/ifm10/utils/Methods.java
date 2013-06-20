@@ -3781,6 +3781,10 @@ public class Methods {
 		
 	}//public static TI convertCursorToThumbnailItem(Cursor c)
 
+	/*********************************
+	 * @return true => File copied(i.e. restored)<br>
+	 * 			false => Copying failed
+	 *********************************/
 	public static boolean restore_db(Activity actv, String dbName,
 				String src, String dst) {
 		/*********************************
@@ -3828,7 +3832,9 @@ public class Methods {
 			// Log
 			Log.d("ThumbnailActivity.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "File copied: " + src);
+					+ "]",
+					"File copied from: " + src
+					+ "/ to: " + dst);
 			
 			if (Looper.myLooper() == Looper.getMainLooper()) {
 				
