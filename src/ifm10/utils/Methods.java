@@ -5463,7 +5463,8 @@ public class Methods {
 
 	/*********************************
 	 * @return true => Log written<br>
-	 * 			false => Output failed
+	 * 			false => Output failed, or Log dir wasn't created, or<br>
+	 * 						log file wasn't created
 	 *********************************/
 	public static boolean writeLog(String message, String header) {
 		/*********************************
@@ -5481,16 +5482,52 @@ public class Methods {
 		
 		File f = new File(fpath_Log);
 		
+		File dir_Log = new File(CONS.Admin.dpath_Log);
+		
+		boolean res;
 		
 		/*********************************
-		 * Validate
+		 * Validate: IFM10_log
+		 *********************************/
+		
+		if (!dir_Log.exists()) {
+			
+			res = dir_Log.mkdir();
+			
+			if (res == true) {
+				
+				// Log
+				Log.d("["
+						+ "Methods.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]",
+						"Log dir => Created : " + dir_Log.getAbsolutePath());
+				
+			} else {//if (res == true)
+				
+				// Log
+				Log.d("["
+						+ "Methods.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]",
+						"Created log dir => Failed : " + dir_Log.getAbsolutePath());
+				
+				return false;
+				
+			}//if (res == true)
+			
+			
+		}//if (!dir_Log.exists())
+		
+		/*********************************
+		 * Validate: Log file
 		 *********************************/
 		// If the log file doesn't exist, create one
 		if (!f.exists()) {
 			
 			try {
 				
-				boolean res = f.createNewFile();
+				res = f.createNewFile();
 				
 			} catch (IOException e) {
 				
@@ -5498,7 +5535,9 @@ public class Methods {
 				Log.d("["
 						+ "Methods.java : "
 						+ +Thread.currentThread().getStackTrace()[2]
-								.getLineNumber() + "]", "Create log file => Failed");
+								.getLineNumber() + "]",
+						"Create log file => Failed : " + f.getAbsolutePath()
+						+ " ==> " + e.toString());
 				
 				return false;
 				

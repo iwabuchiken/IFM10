@@ -721,7 +721,7 @@ public class MainActv extends ListActivity {
 			----------------------------*/
 		if (file_names == null) {
 			
-			init_file_list(file);
+			init_file_list(file);	// Build a list for MainActv
 			
 		}//if (this.file_names == null)
 			
@@ -743,7 +743,7 @@ public class MainActv extends ListActivity {
 			----------------------------*/
 		return false;
 		
-	}//private boolean set_initial_dir_list()
+	}//private boolean set_initial_dir_list_part1() {
 
 	private void set_listener_to_list() {
 		/*********************************
@@ -1379,9 +1379,9 @@ public class MainActv extends ListActivity {
 	protected void onStart() {
 		
 //		setup_tablet();
-//		
-//		setup();
-//		
+		
+		setup();
+		
 //		debug_B29_ftp();
 //		
 		super.onStart();
@@ -1391,7 +1391,7 @@ public class MainActv extends ListActivity {
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "onStart!");
 		
-		debugs();
+//		debugs();
 		
 	}//protected void onStart()
 
@@ -1399,7 +1399,7 @@ public class MainActv extends ListActivity {
 		// TODO Auto-generated method stub
 //		debug_master_v3_0__SetupDB();
 		
-		debug_master_v3_2__CreateSubDirs();
+//		debug_master_v3_2__CreateSubDirs();
 	}
 
 	/*********************************
