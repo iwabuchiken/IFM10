@@ -996,7 +996,7 @@ public class Methods {
 //				+ "]", "tableName => " + tableName);
 		
 		
-		return tableName;
+		return tableName.replace("IFM10", "IFM9");
 	}//public static String convert_path_into_table_name(Activity actv)
 
 	public static String convert_path_into_table_name(Activity actv, String newPath) {
