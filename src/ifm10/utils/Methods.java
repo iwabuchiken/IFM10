@@ -4092,6 +4092,13 @@ public class Methods {
 		String pref_history_size = 
 				prefs.getString(actv.getString(R.string.prefs_history_size_key), null);
 		
+		// If the preference is not yet set, then the value be '50' 
+		if (pref_history_size == null) {
+			
+			pref_history_size = "50";
+			
+		}//if (pref_history_size == null)
+		
 		result = Methods.is_numeric(pref_history_size);
 		
 		int history_size = 0;
@@ -4891,6 +4898,11 @@ public class Methods {
 	}//public static int get_num_of_entries(Activity actv, String table_name)
 
 	public static boolean is_numeric(String str) {
+		
+		// Log
+		Log.d("[" + "Methods.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "str=" + str);
 		
 		// REF=> http://www.coderanch.com/t/401142/java/java/check-if-String-value-numeric # Hurkpan Potgieter Greenhorn
 		String regex = "((-|\\+)?[0-9]+(\\.[0-9]+)?)+";
