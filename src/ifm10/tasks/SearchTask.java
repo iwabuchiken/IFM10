@@ -242,12 +242,21 @@ public class SearchTask extends AsyncTask<String[], Integer, String>{
 		 * 1. No memo in the item => Next item
 		 * 2. If it matches, add to searchedItems and table_names
 		 *********************************/
-		
+		// Log
+		Log.d("[" + "SearchTask.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "c.getCount()=" + c.getCount());
 		
 		for (int i = 0; i < c.getCount(); i++) {
 			
 //			String memo = c.getString(6);
 			String memo = c.getString(8);
+			
+			// Log
+			Log.d("["
+					+ "SearchTask.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "memo=" + memo);
 			
 			/*********************************
 			 * 1. No memo in the item => Next item
@@ -261,7 +270,12 @@ public class SearchTask extends AsyncTask<String[], Integer, String>{
 			}//if (memo == null)
 			
 			for (String string : key_words) {
-				
+
+				// Log
+				Log.d("["
+						+ "SearchTask.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]", "string=" + string);
 				
 				/*********************************
 				 * 2. If it matches, add to searchedItems and table_names

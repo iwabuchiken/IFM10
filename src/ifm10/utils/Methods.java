@@ -4737,7 +4737,8 @@ public class Methods {
 			
 //			String t_name = c.getString(0);
 			
-			String reg = "IFM9.*";
+//			String reg = "IFM9.*";	// => In the non-reg expression, "IFM9*"
+			String reg = "IFM10.*";
 			
 			Pattern p = Pattern.compile(reg);
 			Matcher m;// = p.matcher(t_name);
@@ -4780,6 +4781,14 @@ public class Methods {
 //				+ "]", "c.getCount(): " + c.getCount());
 //		
 		rdb.close();
+		
+		Log.d("[" + "Methods.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "tableList=" + tableList);
+		
+		Log.d("[" + "Methods.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "tableList.size()=" + tableList.size());
 		
 		return tableList;
 	}//public static List<String> get_table_list(Activity actv, String key_word)
