@@ -16,6 +16,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -308,11 +309,44 @@ public class DialogButtonOnClickListener implements OnClickListener {
 	}//private void case_dlg_edit_ti_bt_ok()
 
 	private void case_dlg_confirm_delete_ti_ok() {
+		
+		CheckBox cb = (CheckBox) dlg2.findViewById(R.id.dlg_confirm_remove_folder_cb_delete_file);
+		
+//		if (cb.isChecked()) {
+//			
+//			// Log
+//			Log.d("["
+//					+ "DialogButtonOnClickListener.java : "
+//					+ +Thread.currentThread().getStackTrace()[2]
+//							.getLineNumber() + "]", "CheckBox => Checked");
+//			
+//		} else {//if (cb.isChecked())
+//
+//			// Log
+//			Log.d("["
+//					+ "DialogButtonOnClickListener.java : "
+//					+ +Thread.currentThread().getStackTrace()[2]
+//							.getLineNumber() + "]", "CheckBox => Not checked");
+//
+//		}//if (cb.isChecked())
+		
+		
 		// TODO Auto-generated method stub
 		/***************************************
 		 * Delete from: DB
 		 ***************************************/
-		boolean res = Methods_IFM9.delete_TI(actv, ti);
+		boolean res;
+		
+		if (cb.isChecked()) {
+			
+			res = Methods_IFM9.delete_TI_with_files(actv, ti);
+			
+		} else {//if (res)
+			
+			res = Methods_IFM9.delete_TI(actv, ti);
+			
+		}//if (res)
+		
 		
 		/***************************************
 		 * Delete from: List
