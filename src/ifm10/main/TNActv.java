@@ -1096,24 +1096,6 @@ public class TNActv extends ListActivity {
 		
 		move_mode = true;
 		
-//		// Log
-//		Log.d("TNActv.java"
-//				+ "["
-//				+ Thread.currentThread().getStackTrace()[2]
-//						.getLineNumber() + "]", "move_mode => Now true");
-		
-		/*----------------------------
-		 * 2-1. Set position to preference
-			----------------------------*/
-//		// Log
-//		Log.d("TNActv.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "this.getSelectedItemPosition(): " + this.getSelectedItemPosition());
-//
-//		Log.d("TNActv.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "this.getSelectedItemId(): " + this.getSelectedItemId());
-//
 		/*----------------------------
 		 * 4. Re-set tiList
 			----------------------------*/

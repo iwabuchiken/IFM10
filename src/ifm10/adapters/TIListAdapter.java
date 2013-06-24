@@ -149,6 +149,12 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 		 * 
 		 * 2.7. Return
 			----------------------------*/
+		
+		// Log
+		Log.d("[" + "TIListAdapter.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "move_mode => on");
+		
     	/*----------------------------
 		 * 2.1. Set layout
 			----------------------------*/
