@@ -768,6 +768,48 @@ public class DBUtils extends SQLiteOpenHelper{
 	
 	}//public void updateData_memos
 
+	public static boolean updateData_TI_tableName(Activity actv, SQLiteDatabase wdb, String tableName, 
+			long id, String newTableName) {
+		/*----------------------------
+		 * Steps
+		 * 1. 
+		----------------------------*/
+		// REF http://www.javadrive.jp/android/sqlite_data/index7.html
+		ContentValues cv = new ContentValues();
+		
+		cv.put(CONS.cols_full[11], newTableName);
+
+		int res = wdb.update(
+							tableName,
+							cv,
+							android.provider.BaseColumns._ID + " = ?",
+							new String[]{String.valueOf(id)}
+				);
+
+		if (res > 0) {
+			
+			// Log
+			Log.d("["
+					+ "DBUtils.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "Updated: " + newTableName);
+			
+			return true;
+			
+		} else {//if (res > 0)
+			
+			// Log
+			Log.d("["
+					+ "DBUtils.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "Update => Failed: " + newTableName);
+			
+			return false;
+			
+		}//if (res > 0)
+		
+	}//public void updateData_memos
+
 	public boolean deleteData(Activity actv, SQLiteDatabase db, String tableName, long file_id) {
 		/*----------------------------
 		 * Steps

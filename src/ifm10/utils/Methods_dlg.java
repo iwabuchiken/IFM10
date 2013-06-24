@@ -1015,6 +1015,7 @@ public class Methods_dlg {
 				actv.getString(R.string.dlg_db_admin_item_set_new_column),
 				actv.getString(R.string.dlg_db_admin_item_restore_db),
 				actv.getString(R.string.dlg_db_admin_item_upload_db),
+				actv.getString(R.string.dlg_db_admin_item_fix_table_names),
 		};
 		
 		List<String> list = new ArrayList<String>();
@@ -1024,6 +1025,8 @@ public class Methods_dlg {
 			list.add(item);
 			
 		}
+		
+		Collections.sort(list);
 		
 		/*----------------------------
 		 * 3. Adapter

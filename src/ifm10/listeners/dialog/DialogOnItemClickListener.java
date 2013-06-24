@@ -1,11 +1,14 @@
 package ifm10.listeners.dialog;
 
 import ifm10.items.TI;
+import ifm10.main.MainActv;
 import ifm10.main.R;
 import ifm10.tasks.RefreshDBTask;
 import ifm10.tasks.TaskFTP;
+import ifm10.tasks.Task_FixTableNameValue;
 import ifm10.tasks.Task_add_table_name;
 import ifm10.utils.CONS;
+import ifm10.utils.DBUtils;
 import ifm10.utils.Methods;
 import ifm10.utils.Methods_dlg;
 import ifm10.utils.Tags;
@@ -15,6 +18,8 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
@@ -255,9 +260,27 @@ DialogOnItemClickListener implements OnItemClickListener {
 			//
 			dlg_db_admin_item_upload_db();
 			
+		} else if (item.equals(actv.getString(
+				R.string.dlg_db_admin_item_fix_table_names))){
+			
+			//
+			dlg_db_admin_item_fix_table_names();
+			
 		}
 		
 	}//private void case_dlg_db_admin_lv(AdapterView<?> parent, int position)
+
+	private void dlg_db_admin_item_fix_table_names() {
+		/*********************************
+		 * Get a list of table names
+		 *********************************/
+		Task_FixTableNameValue task = new Task_FixTableNameValue(actv);
+		
+		task.execute(new String[]{"Start"});
+		
+		dlg1.dismiss();
+		
+	}//private void dlg_db_admin_item_fix_table_names()
 
 	private void dlg_db_admin_item_upload_db() {
 

@@ -114,6 +114,7 @@
     <string name="dlg_db_admin_item_set_new_column">Set new column</string>
     <string name="dlg_db_admin_item_restore_db">Restore db</string>
     <string name="dlg_db_admin_item_upload_db">Upload db</string>
+    <string name="dlg_db_admin_item_fix_table_names">Fix \'table_name\' values</string>
 
     <!-- dlg_delete_patterns.xml -->
     <string name="dlg_delete_patterns_title">定型句　削除</string>

@@ -59,6 +59,26 @@ public class CONS {
 		"table_name"};
 //	"date_modified", "memos", "tags"};
 
+	public static String[] cols_full =
+			//column number: 3-6
+			//Table index
+		{
+			//	0
+			android.provider.BaseColumns._ID,
+			//	1			2
+			"created_at", "modified_at",
+			//	3		4				5
+			"file_id", "file_path", "file_name",
+			//	6			7
+			"date_added", "date_modified",
+			//	8		9
+			"memos", "tags",
+			//	10
+			"last_viewed_at",
+			//	11
+			"table_name"
+		};
+
 	public static String[] col_types =
 		{"INTEGER", "TEXT", 	"TEXT",			"INTEGER",
 		"INTEGER",			"TEXT",	"TEXT",		"INTEGER",

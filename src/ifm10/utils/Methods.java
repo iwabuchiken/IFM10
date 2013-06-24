@@ -4784,10 +4784,6 @@ public class Methods {
 		
 		Log.d("[" + "Methods.java : "
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "tableList=" + tableList);
-		
-		Log.d("[" + "Methods.java : "
-				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "tableList.size()=" + tableList.size());
 		
 		return tableList;
