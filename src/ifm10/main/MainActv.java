@@ -148,7 +148,8 @@ public class MainActv extends ListActivity {
 	public static String fileName_db_backup_trunk = "ifm10_backup";
 	public static String fileName_db_backup_ext = ".bk";
 
-	public static String tname_main = "IFM9";
+//	public static String tname_main = "IFM9";
+	public static String tname_main = "IFM10";
 	
     /** Called when the activity is first created. */
     @Override

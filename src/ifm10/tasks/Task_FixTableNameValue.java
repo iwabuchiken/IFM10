@@ -66,7 +66,6 @@ public class Task_FixTableNameValue extends AsyncTask<String[], Integer, Integer
 						"Processing... => " + tname
 						+ "(" + String.valueOf(c.getLong(0)) + ")");
 				
-				counter += 1;
 				
 				String val = c.getString(11);
 //				String val = c.getString(8);
@@ -101,6 +100,8 @@ public class Task_FixTableNameValue extends AsyncTask<String[], Integer, Integer
 				}//if (tname.equals(val))
 				
 			}//while (c.moveToNext()) {
+			
+			counter += 1;
 			
 			// Publish progress
 			this.publishProgress(new Integer[]{tnames.size(), counter});

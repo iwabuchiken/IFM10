@@ -16,8 +16,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ifm9_project_50x50"
-        android:label="@string/app_name" 
-        android:theme="@style/AppTheme" >
+        android:label="@string/app_name">
         <activity
             android:name="ifm10.main.MainActv"
             android:label="@string/app_name" >
