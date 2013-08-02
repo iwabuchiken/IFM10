@@ -39,6 +39,7 @@ public class Task_FixTableNameValue extends AsyncTask<String[], Integer, Integer
 			
 			String tname = tnames.get(i);
 
+			//REF http://yan-note.blogspot.jp/2010/09/android-select.html
 			Cursor c = wdb.query(tname, CONS.cols_full, null, null, null, null, null);
 			
 			// If the query returns null, then the next table
@@ -103,6 +104,7 @@ public class Task_FixTableNameValue extends AsyncTask<String[], Integer, Integer
 			
 			counter += 1;
 			
+			//REF http://stackoverflow.com/questions/6450275/android-how-to-work-with-asynctasks-progressdialog answered Jun 23 '11 at 6:58
 			// Publish progress
 			this.publishProgress(new Integer[]{tnames.size(), counter});
 			

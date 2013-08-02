@@ -311,6 +311,13 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 			----------------------------*/
     	TI ti = (TI) getItem(position);
 
+    	// Log
+		Log.d("[" + "TIListAdapter.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "File name=" + ti.getFile_name());
+    	
     	/*********************************
 		 * 3-2. Set background
 		 *********************************/

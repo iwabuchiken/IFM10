@@ -117,49 +117,7 @@ DialogOnItemClickListener implements OnItemClickListener {
 			 * 2. Switching
 				----------------------------*/
 			case_dlg_db_admin_lv(parent, position);
-//			
-//			String item = (String) parent.getItemAtPosition(position);
-//			
-////			// debug
-////			Toast.makeText(actv, item, 2000).show();
-//			
-//			/*----------------------------
-//			 * 2. Switching
-//				----------------------------*/
-//			if (item.equals(actv.getString(R.string.dlg_db_admin_item_backup_db))) {
-//				
-//				Methods.db_backup(actv, dlg1);
-//				
-//			} else if (item.equals(actv.getString(R.string.dlg_db_admin_item_refresh_db))){
-//				
-//				RefreshDBTask task_ = new RefreshDBTask(actv, dlg1);
-//				
-//				// debug
-//				Toast.makeText(actv, "Starting a task...", 2000)
-//						.show();
-//				
-//				task_.execute("Start");
-//
-//				dlg1.dismiss();
-//				
-//			} else if (item.equals(actv.getString(R.string.dlg_db_admin_item_set_new_column))){
-//				
-//				//
-//				dlg_db_admin_item_set_new_column();
-//				
-//			} else if (item.equals(actv.getString(R.string.dlg_db_admin_item_restore_db))){
-//				
-//				//
-//				dlg_db_admin_item_restore_db();
-//				
-//			} else if (item.equals(actv.getString(
-//							R.string.dlg_db_admin_item_upload_db))){
-//				
-//				//
-//				dlg_db_admin_item_upload_db();
-//				
-//			}
-//			
+
 			break;// case dlg_add_memos_gv
 
 		case dlg_admin_patterns_lv://----------------------------------------------

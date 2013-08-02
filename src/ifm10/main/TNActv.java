@@ -254,6 +254,22 @@ public class TNActv extends ListActivity {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "tiList.size(): " + tiList.size());
 			
+			//debug
+			for (TI ti : tiList) {
+				
+				// Log
+				Log.d("["
+						+ "TNActv.java : "
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+								+ ":"
+								+ Thread.currentThread().getStackTrace()[2].getMethodName()
+								+ "]",
+								
+								"File name=" + ti.getFile_name());
+				
+			}
+
 		}//if (tiList == null)
 		
 		/*----------------------------
@@ -296,27 +312,27 @@ public class TNActv extends ListActivity {
 			
 		}
 
-//		Collections.sort(tiList, new Comparator<TI>(){
-//
-////			@Override
-//			public int compare(TI lhs, TI rhs) {
-//				// TODO �����������ꂽ���\�b�h�E�X�^�u
-//				
-////				return (int) (lhs.getDate_added() - rhs.getDate_added());
-//				
-//				return (int) (lhs.getFile_name().compareToIgnoreCase(rhs.getFile_name()));
-//			}
-//			
-//		});
-
 		// Log
 		Log.d("TNActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "tiList => Sort done");
+
 		
-//		Log.d("TNActv.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "After sort => tiList.size(): " + tiList.size());
+		//debug
+		for (TI ti : tiList) {
+			
+			// Log
+			Log.d("["
+					+ "TNActv.java : "
+					+ Thread.currentThread().getStackTrace()[2]
+							.getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					
+					"File name=" + ti.getFile_name());
+			
+		}
 		
 		/*----------------------------
 		 * 4. Prep adapter
@@ -328,24 +344,29 @@ public class TNActv extends ListActivity {
 //						ThumbnailActivity.tiList);
 						tiList);
 		
+		// Log
+		Log.d("[" + "TNActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "aAdapter.getCount()=" + String.valueOf(aAdapter.getCount()));
+		
 		/*----------------------------
 		 * 5. Set adapter
 			----------------------------*/
 		setListAdapter(aAdapter);
 		
-		ArrayList<String> list = new ArrayList<String>();
-		
-		for (TI item : tiList) {
-			
-			list.add(item.getFile_name());
-			
-		}
-		
-		ArrayAdapter<String> adp = new ArrayAdapter<String>(
-				this,
-				android.R.layout.simple_list_item_1,
-				list
-				);
+//		ArrayList<String> list = new ArrayList<String>();
+//		
+//		for (TI item : tiList) {
+//			
+//			list.add(item.getFile_name());
+//			
+//		}
+//		
+//		ArrayAdapter<String> adp = new ArrayAdapter<String>(
+//				this,
+//				android.R.layout.simple_list_item_1,
+//				list
+//				);
 		
 //		setListAdapter(adp);
 		

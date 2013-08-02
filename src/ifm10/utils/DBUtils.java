@@ -966,7 +966,9 @@ public class DBUtils extends SQLiteOpenHelper{
 			 * 2. Query
 			 *********************************/
 			String sql = "SELECT * FROM " + history_table_names[i]
-						+ " WHERE file_id='" + history_file_ids[i] + "'";
+//						+ " WHERE file_id='" + history_file_ids[i] + "'";
+						+ " WHERE file_id='"
+							+ String.valueOf(history_file_ids[i]) + "'";
 
 			// Log
 			Log.d("DBUtils.java" + "["
@@ -974,17 +976,19 @@ public class DBUtils extends SQLiteOpenHelper{
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 					+ "]", "sql=" + sql);
+			
 			Cursor c = null;
 			
 			try {
 				
 				c = rdb.rawQuery(sql, null);
 				
-//				// Log
-//				Log.d("DBUtils.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber() + "]", "Query => Done");
+				// Log
+				Log.d("DBUtils.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber() + "]",
+						"Query => Successful");
 				
 			} catch (Exception e) {
 				// Log
@@ -1000,11 +1004,6 @@ public class DBUtils extends SQLiteOpenHelper{
 //				return null;
 			}
 			
-//			// Log
-//			Log.d("Methods.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "c.getCount() => " + c.getCount());
-
 			/*********************************
 			 * 2-1. Record exists?
 			 *********************************/
@@ -1031,7 +1030,6 @@ public class DBUtils extends SQLiteOpenHelper{
 						"c.getCount()=" + c.getCount());
 				
 			}
-			
 			
 			/*********************************
 			 * 2-2. Create a TI object
@@ -1062,6 +1060,14 @@ public class DBUtils extends SQLiteOpenHelper{
 			 *********************************/
 			tiList.add(ti);
 					
+			
+			// Log
+			Log.d("["
+					+ "DBUtils.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]",
+					"TI added: " + ti.getFile_name());
+			
 			/*----------------------------
 			 * 2.2. Add to list
 				----------------------------*/
