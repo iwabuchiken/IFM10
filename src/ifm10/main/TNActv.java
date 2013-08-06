@@ -110,9 +110,6 @@ public class TNActv extends ListActivity {
 		/*----------------------------
 		 * 4. Set up
 			----------------------------*/
-//		//debug
-//		Methods.update_prefs_currentPath(this, MainActv.dirName_base);
-		
 		set_listeners();
 		
 		set_list();
@@ -126,16 +123,6 @@ public class TNActv extends ListActivity {
 		 * 5. Initialize vars
 			----------------------------*/
 		checkedPositions = new ArrayList<Integer>();
-
-		//debug
-//		get_data_from_table_AAA();
-		
-//		get_tables_from_db();
-		
-//		// Log
-//		Log.d("Methods.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "prefs_current_path: " + Methods.get_pref(this, MainActv.prefs_current_path, "NO DATA"));
 		
 	}//public void onCreate(Bundle savedInstanceState)
 
@@ -222,10 +209,6 @@ public class TNActv extends ListActivity {
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "tableName: " + tableName);
 		
-		//debug
-//		Methods.getTableList(this);
-		
-		
 		/*----------------------------
 		 * 2. Prep list
 			----------------------------*/
@@ -242,10 +225,6 @@ public class TNActv extends ListActivity {
 			show_message_no_data();
 
 			return;
-//			// debug
-//			Toast.makeText(this, 
-//							"���̃t�H���_�ɂ́A�t�@�C���͂���܂���B���̃t�H���_����A�I�v�V�����E���j���[�́u�ړ��v���g���āA�����Ă���܂�", 
-//							7000).show();
 			
 		} else {//if (tiList == null)
 
@@ -254,22 +233,6 @@ public class TNActv extends ListActivity {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "tiList.size(): " + tiList.size());
 			
-			//debug
-			for (TI ti : tiList) {
-				
-				// Log
-				Log.d("["
-						+ "TNActv.java : "
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-								+ ":"
-								+ Thread.currentThread().getStackTrace()[2].getMethodName()
-								+ "]",
-								
-								"File name=" + ti.getFile_name());
-				
-			}
-
 		}//if (tiList == null)
 		
 		/*----------------------------
@@ -316,23 +279,6 @@ public class TNActv extends ListActivity {
 		Log.d("TNActv.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "tiList => Sort done");
-
-		
-		//debug
-		for (TI ti : tiList) {
-			
-			// Log
-			Log.d("["
-					+ "TNActv.java : "
-					+ Thread.currentThread().getStackTrace()[2]
-							.getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]",
-					
-					"File name=" + ti.getFile_name());
-			
-		}
 		
 		/*----------------------------
 		 * 4. Prep adapter
@@ -341,7 +287,6 @@ public class TNActv extends ListActivity {
 				new TIListAdapter(
 						this, 
 						R.layout.thumb_activity, 
-//						ThumbnailActivity.tiList);
 						tiList);
 		
 		// Log
@@ -353,22 +298,6 @@ public class TNActv extends ListActivity {
 		 * 5. Set adapter
 			----------------------------*/
 		setListAdapter(aAdapter);
-		
-//		ArrayList<String> list = new ArrayList<String>();
-//		
-//		for (TI item : tiList) {
-//			
-//			list.add(item.getFile_name());
-//			
-//		}
-//		
-//		ArrayAdapter<String> adp = new ArrayAdapter<String>(
-//				this,
-//				android.R.layout.simple_list_item_1,
-//				list
-//				);
-		
-//		setListAdapter(adp);
 		
 	}//private void set_list()
 
@@ -811,8 +740,8 @@ public class TNActv extends ListActivity {
 	public void show_message_no_data() {
 		AlertDialog.Builder dialog=new AlertDialog.Builder(this);
 		
-        dialog.setTitle("���");
-        dialog.setMessage("���̃t�H���_�ɂ́A�f�[�^�͂���܂���B���̃t�H���_����A�I�v�V�����E���j���[�́u�ړ��v���g���āA�����Ă���܂�");
+        dialog.setTitle("Notice");
+        dialog.setMessage("No data for TI list");
         
         dialog.setPositiveButton("OK",new DialogListener(this, dialog, 0));
         
@@ -837,13 +766,6 @@ public class TNActv extends ListActivity {
 		 * 
 		 * 3. Start intent
 			----------------------------*/
-		//debug
-//		// Log
-//		Log.d("TNActv.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "v.getId()=" + v.getId());
-		
-		
 		/*----------------------------
 		 * 0. Vibrate
 			----------------------------*/
