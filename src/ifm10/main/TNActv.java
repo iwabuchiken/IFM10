@@ -366,15 +366,6 @@ public class TNActv extends ListActivity {
 				tiList = Methods.convert_fileIdArray2tiList(this, tableName, long_searchedItems);
 				
 			}//if (string_searchedItems_table_names != null)
-			
-//				// Log
-//				Log.d("TNActv.java" + "["
-//						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//						+ "]", "Calling: Methods.convert_fileIdArray2tiList()");
-//				
-//	//			tiList = Methods.getAllData(this, tableName);
-//	//			tiList = Methods.convert_fileIdArray2tiList(this, MainActv.dirName_base, long_searchedItems);
-//				tiList = Methods.convert_fileIdArray2tiList(this, tableName, long_searchedItems);
 
 			// Log
 			Log.d("TNActv.java" + "["
@@ -390,14 +381,6 @@ public class TNActv extends ListActivity {
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 					+ "]", "history_file_ids != null");
-			
-			// Log
-			Log.d("TNActv.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "file_ids: length=" + history_file_ids.length + 
-					"/" + "history_table_names: length=" + history_table_names.length);
 			
 			tiList = Methods.get_all_data_history(
 								this,
