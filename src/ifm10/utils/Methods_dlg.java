@@ -1708,5 +1708,65 @@ public class Methods_dlg {
 		
 	}//uploadImageFile(Activity actv, Dialog dlg1, TI ti)
 
+	public static void
+	dlg_confirm_uploadImageFile
+	(Activity actv, Dialog dlg1, TI ti) {
+		
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(R.layout.dlg_confirm_remove_folder);
+		
+		// Title
+		dlg2.setTitle(R.string.generic_tv_confirm);
+		
+		/***************************************
+		 * Set: Message
+		 ***************************************/
+		TextView tvMessage = (TextView)
+						dlg2.findViewById(R.id.dlg_confirm_remove_folder_tv_message);
+		
+		tvMessage.setText(actv.getString(
+							R.string.dlg_confirm_upload_image_files_tv_message));
+
+		
+		/*----------------------------
+		 * 2. Set folder name to text view
+			----------------------------*/
+		TextView tv = (TextView) dlg2.findViewById(R.id.dlg_confirm_remove_folder_tv_table_name);
+		
+		tv.setText(ti.getFile_name());
+		
+		/*----------------------------
+		 * 3. Add listeners => OnTouch
+			----------------------------*/
+		//
+		Button btn_ok = (Button)
+						dlg2.findViewById(R.id.dlg_confirm_remove_folder_btn_ok);
+		Button btn_cancel = (Button)
+						dlg2.findViewById(R.id.dlg_confirm_remove_folder_btn_cancel);
+
+		btn_ok.setTag(DialogTags.dlg_confirm_upload_image_files_ok);
+		btn_cancel.setTag(DialogTags.dlg_confirm_upload_image_files_cancel);
+		
+		//
+		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg1, dlg2));
+		btn_cancel.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg1, dlg2));
+		
+		/*----------------------------
+		 * 4. Add listeners => OnClick
+			----------------------------*/
+		//
+		btn_ok.setOnClickListener(new DialogButtonOnClickListener(actv, dlg1, dlg2, ti));
+		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg1, dlg2));
+		
+		/*----------------------------
+		 * 5. Show dialog
+			----------------------------*/
+		dlg2.show();
+
+		
+	}//dlg_confirm_uploadImageFile
+
 }//public class Methods
 

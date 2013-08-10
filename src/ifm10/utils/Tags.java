@@ -60,6 +60,10 @@ public class Tags {
 		
 		// dlg_confirm_delete_ti
 		dlg_confirm_delete_ti_ok, dlg_confirm_delete_ti_cancel,
+
+		// dlg_confirm_upload_image_files
+		dlg_confirm_upload_image_files_ok,
+		dlg_confirm_upload_image_files_cancel,
 		
 		// dlg_edit_ti.xml
 		dlg_edit_ti_bt_ok,

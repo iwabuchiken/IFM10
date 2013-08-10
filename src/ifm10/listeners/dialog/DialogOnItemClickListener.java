@@ -266,7 +266,8 @@ DialogOnItemClickListener implements OnItemClickListener {
 		} else if (item.equals(actv.getString(
 						R.string.generic_tv_upload))) {//if (item.equals(actv.getString(R.string.generic_tv_delete))))
 			
-			Methods_dlg.uploadImageFile(actv, dlg1, ti);
+//			Methods_dlg.uploadImageFile_main(actv, dlg1, ti);
+			Methods_dlg.dlg_confirm_uploadImageFile(actv, dlg1, ti);
 			
 		}//if (item.equals(actv.getString(R.string.generic_tv_delete))))
 		

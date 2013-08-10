@@ -71,6 +71,10 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 				case dlg_confirm_delete_patterns_ok:
 					
 				case dlg_confirm_delete_ti_ok:
+					
+				case dlg_confirm_upload_image_files_ok:
+				case dlg_confirm_upload_image_files_cancel:
+					
 					//
 					v.setBackgroundColor(Color.GRAY);
 					
@@ -107,6 +111,9 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 			case dlg_confirm_delete_patterns_ok:
 				
 			case dlg_confirm_delete_ti_ok:
+				
+			case dlg_confirm_upload_image_files_ok:
+			case dlg_confirm_upload_image_files_cancel:
 				
 				//
 					v.setBackgroundColor(Color.WHITE);

@@ -2,6 +2,7 @@ package ifm10.tasks;
 
 import ifm10.items.TI;
 import ifm10.main.R;
+import ifm10.main.TNActv;
 import ifm10.utils.MethodsFTP;
 import ifm10.utils.Methods_IFM9;
 import android.app.Activity;
@@ -17,6 +18,8 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 	
 	TI ti;
 	
+	boolean delete;
+	
 	public TaskFTP(Activity actv) {
 		
 		this.actv = actv;
@@ -31,10 +34,24 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 	}
 
 	
-	
+	/*********************************
+	 * @param boolean delete<br>
+	 * 			true => Delete the file when uploaded<br>
+	 * 			false => Doesn't delete the file when uploaded
+	 *********************************/
+	public TaskFTP(Activity actv, TI ti, boolean delete) {
+
+		this.actv	= actv;
+		this.ti		= ti;
+		
+		this.delete	= delete;
+
+	}
+
 	@Override
 //	protected String doInBackground(String... ftpTags) {
-	protected Integer doInBackground(String... ftpTags) {
+	protected Integer
+	doInBackground(String... ftpTags) {
 		
 		// Log
 		Log.d("TaskFTP.java" + "["
@@ -49,14 +66,6 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 
 			res = MethodsFTP.ftp_connect_disconnect(actv, ti);
 			
-//			res = 1;
-			
-//			if (res > 0) {
-//
-//				res = Methods_IFM9.postFileNameToLollipopSite(actv, ti);
-//				
-//			}//if (res == true)
-			
 		} else if (ftpTags[0].equals(actv.getString(R.string.ftp_upload_db_file))) {
 				
 				res = MethodsFTP.uploadDbFile(actv);
@@ -67,36 +76,17 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 			
 		}//if (ftpTag.equals(actv.getString(R.string.ftp_lollipop)))
 		
-		
-//		// Log
-//		Log.d("TaskFTP.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "res=" + res);
-		
-//		int res = try_1();
-		
 		if (res > 0) {
 
 			return res;
-//			return String.valueOf(res);
 			
 		} else {//if (res == true)
 			
 			return res;
-//			return String.valueOf(res);
 			
 		}//if (res == true)
-		
-		
-//		return "done";
-	}
 
-	private int try_1() {
-		
-		
-		
-		return 0;
-	}
+	}//doInBackground(String... ftpTags)
 
 	@Override
 //	protected void onPostExecute(String result) {
@@ -106,21 +96,81 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 		
 		// debug
 		Toast.makeText(actv,
-				"Result => " + String.valueOf(res),
+				"Result(FTP) => " + String.valueOf(res),
 				Toast.LENGTH_SHORT).show();
 		
+		/*********************************
+		 * Posting data to the Rails site
+		 *********************************/
 		if (res > 0 && ti != null) {
 
+			// debug
+			Toast.makeText(actv,
+					"Posting to the Rails site", Toast.LENGTH_SHORT).show();
+			
 			res = Methods_IFM9.postFileNameToRailsSite(actv, ti);
+
+			/*********************************
+			 * Delete files from DB
+			 *********************************/
+			if (delete == true) {
+				
+				boolean result = Methods_IFM9.delete_TI_with_files(actv, ti);
+				
+				// Log
+				Log.d("["
+						+ "TaskFTP.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ " : "
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"File deleted, too: " + ti.getFile_name());
+				
+				// debug
+				Toast.makeText(actv,
+						"File deleted, too: " + ti.getFile_name(),
+						Toast.LENGTH_LONG).show();
+				
+				/*********************************
+				 * Delete files from the list
+				 *********************************/
+				TNActv.tiList.remove(ti);
+
+				if (TNActv.aAdapter != null) {
+				
+					TNActv.aAdapter.notifyDataSetChanged();
+					
+				}//if (TNActv.aAdapter == condition)
+					
+				// debug
+				Toast.makeText(actv,
+						"Item deleted: " + ti.getFile_name(),
+						Toast.LENGTH_LONG).show();
+
+				} else {//if (res == true)
+
+					// debug
+					Toast.makeText(actv,
+							"Item deletion from DB => failed: " + ti.getFile_name(),
+							Toast.LENGTH_LONG).show();
+					
+				}//if (res == true)
+				
+			} else {//if (delete == true)
+				
+				// Log
+				Log.d("["
+						+ "TaskFTP.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+								+ " : "
+								+ Thread.currentThread().getStackTrace()[2]
+										.getMethodName() + "]",
+										"File not deleted: " + ti.getFile_name());
+				
+			}//if (delete == true)
 			
-//			res = Methods_IFM9.postFileNameToLollipopSite(actv, ti);
-			
-		}//if (res == true)
-		
-//		TextView tv = (TextView) actv.findViewById(R.id.activity_ftp_tv_message);
-//		
-//		tv.setText(result);
-		
 	}//protected void onPostExecute(String result)
 
 	@Override

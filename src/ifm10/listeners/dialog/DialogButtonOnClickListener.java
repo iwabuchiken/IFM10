@@ -4,6 +4,7 @@ import ifm10.items.TI;
 import ifm10.main.MainActv;
 import ifm10.main.R;
 import ifm10.main.TNActv;
+import ifm10.tasks.TaskFTP;
 import ifm10.utils.CONS;
 import ifm10.utils.DBUtils;
 import ifm10.utils.Methods;
@@ -248,12 +249,24 @@ public class DialogButtonOnClickListener implements OnClickListener {
 			
 			break;// case dlg_confirm_delete_ti_ok
 			
+		case dlg_confirm_upload_image_files_ok://----------------------------------------
+			
+			case_dlg_confirm_upload_image_files_ok();
+			
+			break;// case dlg_confirm_upload_image_files_ok
+			
 		case dlg_confirm_delete_ti_cancel://----------------------------------------
 			
 			dlg2.dismiss();// case dlg_confirm_delete_ti_cancel
 			
 			break;
 		
+		case dlg_confirm_upload_image_files_cancel://----------------------------------------
+			
+			dlg2.dismiss();// case dlg_confirm_delete_ti_cancel
+			
+			break;
+			
 		case dlg_edit_ti_bt_ok://---------------------------------------------
 			
 			case_dlg_edit_ti_bt_ok();
@@ -264,6 +277,61 @@ public class DialogButtonOnClickListener implements OnClickListener {
 			break;
 		}//switch (tag_name)
 	}//public void onClick(View v)
+
+	private void
+	case_dlg_confirm_upload_image_files_ok() {
+		
+		/*********************************
+		 * Check box
+		 *********************************/
+		CheckBox cb = (CheckBox) dlg2.findViewById(
+						R.id.dlg_confirm_remove_folder_cb_delete_file);
+		
+		boolean delete;
+		
+		if (cb.isChecked()) {
+			
+			delete = true;
+			
+		} else {//if (cb.isChecked())
+			
+			delete = false;
+			
+		}//if (cb.isChecked())
+		
+		
+		/*********************************
+		 * Dismiss: Dialog 2
+		 *********************************/
+		dlg2.dismiss();
+		
+//		/***************************************
+//		 * Delete from: DB
+//		 ***************************************/
+//		boolean res;
+//		
+//		if (cb.isChecked()) {
+//			
+//			res = Methods_IFM9.delete_TI_with_files(actv, ti);
+//			
+//		} else {//if (res)
+//			
+//			res = Methods_IFM9.delete_TI(actv, ti);
+//			
+//		}//if (res)
+//		
+		
+		/***************************************
+		 * Upload file
+		 ***************************************/
+//		TaskFTP task = new TaskFTP(actv, ti);
+		TaskFTP task = new TaskFTP(actv, ti, delete);
+		
+		task.execute(actv.getString(R.string.ftp_lollipop));
+		
+		dlg1.dismiss();
+
+	}//case_dlg_confirm_upload_image_files_ok()
 
 	private void case_dlg_edit_ti_bt_ok() {
 		/***************************************

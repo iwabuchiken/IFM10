@@ -210,6 +210,9 @@ public class MethodsFTP {
 		
 	}//public static void ftp_connect_disconnect()
 
+	/*********************************
+	 * Upload image files to the Lollipop site
+	 *********************************/
 	public static int
 	ftp_connect_disconnect(Activity actv, TI ti) {
 		/*********************************
