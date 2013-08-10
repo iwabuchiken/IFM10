@@ -95,12 +95,6 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 		 * 4. Get bitmap
 		 * 5. Get memo, or, file name
 			----------------------------*/
-//    	// Log
-//		Log.d("TIListAdapter.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "getView");
-		
-    	
     	/*----------------------------
 		 * 0. View
 			----------------------------*/
@@ -108,19 +102,9 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 
     	if (moveMode == null || moveMode == CONS.MoveMode.OFF) {
     		
-//    		// Log
-//			Log.d("TIListAdapter.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "moveMode == null || moveMode == Methods.MoveMode.OFF");
-			
     		v = move_mode_off(v, position, convertView);
     		
     	} else {
-
-//    		// Log
-//			Log.d("TIListAdapter.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "moveMode != null");
 
 			v = move_mode_on(v, position, convertView);
 			
@@ -268,11 +252,6 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 
 	private View move_mode_off(View v, int position, View convertView) {
 		
-//		// Log
-//		Log.d("TIListAdapter.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "Starting => move_mode_off()");
-		
 		/*----------------------------
 		 * 1. Set layout
 		 * 2. Get view
@@ -293,10 +272,13 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 			----------------------------*/
 		
     	if (convertView != null) {
-			v = convertView;
+			
+    		v = convertView;
+    		
 		} else {//if (convertView != null)
-//			v = inflater.inflate(R.layout.list_row, null);
+
 			v = inflater.inflate(R.layout.list_row, null);
+			
 		}//if (convertView != null)
 
     	/*----------------------------
@@ -311,13 +293,6 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 			----------------------------*/
     	TI ti = (TI) getItem(position);
 
-    	// Log
-		Log.d("[" + "TIListAdapter.java : "
-				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "File name=" + ti.getFile_name());
-    	
     	/*********************************
 		 * 3-2. Set background
 		 *********************************/
@@ -326,30 +301,12 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 							MainActv.prefName_tnActv,
 							con.MODE_PRIVATE);
 
-
-		//Methods.PrefenceLabels.thumb_actv.name()
-		
-		//int savedPosition = prefs.getInt("chosen_list_item", -1);
 		int savedPosition = prefs.getInt(
 							MainActv.prefName_tnActv_current_image_position,
 							-1);
 		
-//		// Log
-//		Log.d("TIListAdapter.java"
-//				+ "["
-//				+ Thread.currentThread().getStackTrace()[2]
-//						.getLineNumber() + "]", "savedPosition: " + savedPosition);
-		
-		
 		if (savedPosition == position) {
 			
-//			// Log
-//			Log.d("TIListAdapter.java"
-//					+ "["
-//					+ Thread.currentThread().getStackTrace()[2]
-//							.getLineNumber() + "]", "savedPosition == position");
-			
-		//	tv.setBackgroundColor(Color.GREEN);
 			tv.setBackgroundResource(R.color.gold2);
 			tv.setTextColor(Color.BLACK);
 			
@@ -383,14 +340,8 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 		 * 		1. File name
 		 * 		2. Memo
 			----------------------------*/
-//		TextView tv = (TextView) v.findViewById(R.id.textView1);
-		
 		tv.setText(ti.getFile_name());
 
-//		// Log
-//		Log.d("TIListAdapter.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "ti.getFile_name()=" + ti.getFile_name());
 		/*----------------------------
 		 * 5.2. Memo
 			----------------------------*/
@@ -409,11 +360,6 @@ public class TIListAdapter extends ArrayAdapter<TI> {
 			tv_memo.setText("");
 			
 		}//if (memo)
-		
-//		// Log
-//		Log.d("TIListAdapter.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "File name, memo => Set");
 		
 		/*********************************
 		 * 5-2. Get => last viewed
