@@ -46,6 +46,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+
 public class MainActv extends ListActivity {
 	
 	public static Vibrator vib;
@@ -1186,29 +1188,6 @@ public class MainActv extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-
-//		case R.id.main_opt_menu_refresh_db://---------------------------------------
-//			/*----------------------------
-//			 * Steps
-//			 * 1. Vibrate
-//			 * 2. Task
-//				----------------------------*/
-//			
-//			vib.vibrate(Methods.vibLength_click);
-//			
-//			/*----------------------------
-//			 * 2. Task
-//				----------------------------*/
-////			RefreshDBTask task_ = new RefreshDBTask(this);
-//			RefreshDBTask task_ = new RefreshDBTask(this);
-//			
-//			// debug
-//			Toast.makeText(this, "Starting a task...", 2000)
-//					.show();
-//			
-//			task_.execute("Start");
-//			
-//			break;// case R.id.main_opt_menu_refresh_db
 		
 		case R.id.main_opt_menu_create_folder://----------------------------------
 			

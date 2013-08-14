@@ -4160,6 +4160,10 @@ public class Methods {
 		String sql = "SELECT * FROM " + MainActv.tableName_show_history
 				+ " WHERE " + android.provider.BaseColumns._ID + " >= "
 				+ start_id_num;
+//				+ start_id_num
+//				+ " ORDER BY "
+//				+ android.provider.BaseColumns._ID
+//				+ " ASC";
 		
 		// Log
 		Log.d("Methods.java" + "["

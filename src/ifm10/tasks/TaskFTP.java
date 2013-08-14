@@ -3,6 +3,7 @@ package ifm10.tasks;
 import ifm10.items.TI;
 import ifm10.main.R;
 import ifm10.main.TNActv;
+import ifm10.utils.CONS;
 import ifm10.utils.MethodsFTP;
 import ifm10.utils.Methods_IFM9;
 import android.app.Activity;
@@ -111,65 +112,122 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 			res = Methods_IFM9.postFileNameToRailsSite(actv, ti);
 
 			/*********************************
-			 * Delete files from DB
+			 * Delete files from table: ti.getTable_name
 			 *********************************/
 			if (delete == true) {
 				
 				boolean result = Methods_IFM9.delete_TI_with_files(actv, ti);
 				
-				// Log
-				Log.d("["
-						+ "TaskFTP.java : "
-						+ +Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-						+ " : "
-						+ Thread.currentThread().getStackTrace()[2]
-								.getMethodName() + "]",
-						"File deleted, too: " + ti.getFile_name());
-				
-				// debug
-				Toast.makeText(actv,
-						"File deleted, too: " + ti.getFile_name(),
-						Toast.LENGTH_LONG).show();
-				
-				/*********************************
-				 * Delete files from the list
-				 *********************************/
-				TNActv.tiList.remove(ti);
-
-				if (TNActv.aAdapter != null) {
-				
-					TNActv.aAdapter.notifyDataSetChanged();
+				if (result == true) {
 					
-				}//if (TNActv.aAdapter == condition)
+					// Log
+					Log.d("["
+							+ "TaskFTP.java : "
+							+ +Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+									+ " : "
+									+ Thread.currentThread().getStackTrace()[2]
+											.getMethodName() + "]",
+							"TI instance => Deleted from the table: "
+									+ ti.getTable_name());
 					
-				// debug
-				Toast.makeText(actv,
-						"Item deleted: " + ti.getFile_name(),
-						Toast.LENGTH_LONG).show();
-
-				} else {//if (res == true)
-
 					// debug
 					Toast.makeText(actv,
-							"Item deletion from DB => failed: " + ti.getFile_name(),
+							"TI instance => Deleted from the table: "
+									+ ti.getTable_name(),
 							Toast.LENGTH_LONG).show();
 					
-				}//if (res == true)
+					/*********************************
+					 * Delete files from the list
+					 *********************************/
+					TNActv.tiList.remove(ti);
+					
+					if (TNActv.aAdapter != null) {
+						
+						TNActv.aAdapter.notifyDataSetChanged();
+						
+					}//if (TNActv.aAdapter == condition)
+					
+					// debug
+					Toast.makeText(actv,
+							"Item deleted: " + ti.getFile_name(),
+							Toast.LENGTH_LONG).show();
+					
+					/*********************************
+					 * Delete files from table: show_history
+					 *********************************/
+//					int deletedHistories = 
+					result = 
+								Methods_IFM9.delete_TI_from_history(actv, ti);
+					
+				} else {//if (result == true)
+
+					// Log
+					Log.d("["
+							+ "TaskFTP.java : "
+							+ +Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+									+ " : "
+									+ Thread.currentThread().getStackTrace()[2]
+											.getMethodName() + "]",
+							"TI instance => Not deleted from the table: "
+									+ ti.getTable_name());
+					
+					// debug
+					Toast.makeText(actv,
+							"TI instance => Not deleted from the table: "
+									+ ti.getTable_name(),
+									Toast.LENGTH_LONG).show();
+
+				}//if (result == true)
+
+			}//if (delete == true) {
+//			} else {//if (delete == true) {
+//
+//				// debug
+//				Toast.makeText(actv,
+//						"Item deletion from DB => failed: " + ti.getFile_name(),
+//						Toast.LENGTH_LONG).show();
+//					
+//			}//if (res == true)
+			
+		} else if (res > 0) {//if (res > 0 && ti != null) {
 				
-			} else {//if (delete == true)
-				
-				// Log
-				Log.d("["
-						+ "TaskFTP.java : "
-						+ +Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-								+ " : "
-								+ Thread.currentThread().getStackTrace()[2]
-										.getMethodName() + "]",
-										"File not deleted: " + ti.getFile_name());
-				
-			}//if (delete == true)
+			// Log
+			Log.d("["
+					+ "TaskFTP.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber()
+							+ " : "
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+									"res > 0");
+			
+		} else if (ti != null) {//if (res > 0 && ti != null) {
+
+			// Log
+			Log.d("["
+					+ "TaskFTP.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber()
+							+ " : "
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+									"res <= 0");
+
+		} else {//if (res > 0 && ti != null) {
+			
+			// Log
+			Log.d("["
+					+ "TaskFTP.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber()
+							+ " : "
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+					"res <= 0 && ti == null");
+		
+		}//if (res > 0 && ti != null) {
 			
 	}//protected void onPostExecute(String result)
 

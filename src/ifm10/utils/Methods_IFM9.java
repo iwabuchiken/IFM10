@@ -214,4 +214,46 @@ public class Methods_IFM9 {
 		
 	}//public static boolean delete_TI_with_files(Activity actv, TI ti)
 
+
+	public static boolean
+	delete_TI_from_history(Activity actv, TI ti) {
+		
+		DBUtils dbu = new DBUtils(actv, MainActv.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		/*----------------------------
+		 * 2. Query
+			----------------------------*/
+		String sql = "DELETE FROM " + MainActv.tableName_show_history +
+							" WHERE "
+							+ CONS.cols_show_history[0] + " = " + ti.getFileId();
+		
+		try {
+			wdb.execSQL(sql);
+
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "TI item deleted from db: " + ti.getFile_name());
+		
+			wdb.close();
+			
+			return true;
+
+		} catch (SQLException e) {
+			
+			// Log
+			Log.e("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "TI item deletion => Failed:  " + ti.getFile_name());
+			
+			wdb.close();
+			
+			return false;
+			
+		}//try
+
+	}//delete_TI_from_history(Activity actv, TI ti)
+
 }//public class Methods_IFM9
