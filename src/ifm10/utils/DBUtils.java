@@ -399,6 +399,8 @@ public class DBUtils extends SQLiteOpenHelper{
 			val.put("memos", ti.getMemo());
 			val.put("tags", ti.getTags());
 			
+			val.put("table_name", ti.getTable_name());
+			
 			// Insert data
 			db.insert(tableName, null, val);
 			
