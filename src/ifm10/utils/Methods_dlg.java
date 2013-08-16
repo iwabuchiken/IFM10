@@ -1067,9 +1067,11 @@ public class Methods_dlg {
 		 * 1. Dialog
 		 * 9. Show
 			----------------------------*/
-		Dialog dlg = dlg_template_okCancel(
-								actv, R.layout.dlg_search, R.string.dlg_search_title,
-				R.id.dlg_search_bt_ok, R.id.dlg_search_cancel, DialogTags.dlg_search_ok, DialogTags.dlg_generic_dismiss);
+		Dialog dlg = dlg_template_okCancel(actv,
+				R.layout.dlg_search, R.string.dlg_search_title,
+				
+				R.id.dlg_search_bt_ok, R.id.dlg_search_cancel,
+				DialogTags.dlg_search_ok, DialogTags.dlg_generic_dismiss);
 		
 		/*----------------------------
 		 * 9. Show

@@ -3612,13 +3612,7 @@ public class Methods {
 		}//if (condition)
 		
 		SearchTask st = new SearchTask(actv, search_mode);
-		
-//		SearchTask st = new SearchTask(actv);
-		
-		
-		
-//		st.execute(a_words);
-//		st.execute(a_words, new String[]{"aaa", "bbb", "ccc"});
+
 		st.execute(a_words, new String[]{tableName});
 		
 		/*----------------------------
