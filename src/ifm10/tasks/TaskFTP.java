@@ -1,5 +1,12 @@
 package ifm10.tasks;
 
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import ifm10.items.TI;
 import ifm10.main.R;
 import ifm10.main.TNActv;
@@ -101,6 +108,11 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 				Toast.LENGTH_SHORT).show();
 		
 		/*********************************
+		 * Calling url: http://benfranklin.chips.jp/IFM10/create_thumbnails.php
+		 *********************************/
+		boolean result = _onPostExecute__1_create_thumbnails();
+		
+		/*********************************
 		 * Posting data to the Rails site
 		 *********************************/
 		if (res > 0 && ti != null) {
@@ -116,7 +128,7 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 			 *********************************/
 			if (delete == true) {
 				
-				boolean result = Methods_IFM9.delete_TI_with_files(actv, ti);
+				result = Methods_IFM9.delete_TI_with_files(actv, ti);
 				
 				if (result == true) {
 					
@@ -230,6 +242,103 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 		}//if (res > 0 && ti != null) {
 			
 	}//protected void onPostExecute(String result)
+
+	private boolean
+	_onPostExecute__1_create_thumbnails() {
+
+		String url = "http://benfranklin.chips.jp/IFM10/create_thumbnails.php";
+		
+		// Log
+		Log.d("[" + "TaskFTP.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "url=" + url);
+		
+		HttpGet httpGet = new HttpGet(url);
+		
+		DefaultHttpClient dhc = new DefaultHttpClient();
+		
+		HttpResponse hr = null;
+		
+		try {
+			
+			hr = dhc.execute(httpGet);
+			
+		} catch (ClientProtocolException e) {
+		
+			// Log
+			Log.d("TaskHTTP.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", e.toString());
+
+		} catch (IOException e) {
+			// Log
+			Log.d("TaskHTTP.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", e.toString());
+		}
+		
+		if (hr == null) {
+			
+//			// debug
+//			Toast.makeText(actv, "hr == null", 2000).show();
+			
+			// Log
+			Log.d("TaskHTTP.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "hr == null");
+			
+//			return CONS.Task_GetTexts.EXECUTE_POST_NULL;
+			return false;
+			
+		} else {//if (hr == null)
+			
+			// Log
+			Log.d("Task_GetTexts.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Http response => Obtained");
+
+			
+//			return null;
+			
+		}//if (hr == null)
+		
+		/*********************************
+		 * Status code
+		 *********************************/
+		int status = hr.getStatusLine().getStatusCode();
+		
+		if (status == CONS.HTTP_Response.CREATED
+				|| status == CONS.HTTP_Response.OK) {
+
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "status=" + status);
+
+//			return CONS.HTTP_Response.CREATED;
+			
+		} else {//if (status == CONS.HTTP_Response.CREATED)
+			
+			// Log
+			Log.d("Task_GetTexts.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "status=" + status);
+			
+			return false;
+			
+		}//if (status == CONS.HTTP_Response.CREATED)
+
+		return true;
+		
+	}//_onPostExecute__1_create_thumbnails()
 
 	@Override
 	protected void onPreExecute() {
