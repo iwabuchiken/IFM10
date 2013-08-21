@@ -2918,6 +2918,9 @@ public class Methods {
 			----------------------------*/
 		for (TI ti : toMoveFiles) {
 			
+			// Update the table name
+			ti.setTable_name(targetTableName);
+			
 			/*----------------------------
 			 * 1.3.4. Insert data into the new table
 				----------------------------*/
@@ -3088,6 +3091,23 @@ public class Methods {
 		List<TI> toMoveFiles = new ArrayList<TI>();
 		
 		for (int position : TNActv.checkedPositions) {
+			
+			// Log
+			Log.d("["
+					+ "Methods.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+							+ Thread.currentThread().getStackTrace()[2].getMethodName()
+							+ "]",
+					"getFile_name()=" + TNActv.tiList.get(position).getFile_name());
+			// Log
+			Log.d("["
+					+ "Methods.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"getTable_name()=" + TNActv.tiList.get(position).getTable_name());
 			
 			toMoveFiles.add(TNActv.tiList.get(position));
 			
@@ -3612,13 +3632,7 @@ public class Methods {
 		}//if (condition)
 		
 		SearchTask st = new SearchTask(actv, search_mode);
-		
-//		SearchTask st = new SearchTask(actv);
-		
-		
-		
-//		st.execute(a_words);
-//		st.execute(a_words, new String[]{"aaa", "bbb", "ccc"});
+
 		st.execute(a_words, new String[]{tableName});
 		
 		/*----------------------------
