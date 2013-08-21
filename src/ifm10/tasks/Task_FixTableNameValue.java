@@ -88,7 +88,13 @@ public class Task_FixTableNameValue extends AsyncTask<String[], Integer, Integer
 							+ +Thread.currentThread().getStackTrace()[2]
 									.getLineNumber() + "]", "tname != val");
 					
-					boolean res = DBUtils.updateData_TI_tableName(actv, wdb, tname, c.getLong(0), tname);
+//					boolean res = 
+					DBUtils.updateData_TI_tableName(
+											actv,
+											wdb,
+											tname,
+											c.getLong(0),
+											tname);
 					
 				} else {//if (tname.equals(val))
 
@@ -165,13 +171,14 @@ public class Task_FixTableNameValue extends AsyncTask<String[], Integer, Integer
 	protected void onProgressUpdate(Integer... values) {
 		// TODO Auto-generated method stub
 		super.onProgressUpdate(values);
-		
+
 		// debug
 		Toast.makeText(
 					actv,
-					"Progress: " + String.valueOf(values[1]) + "/" + String.valueOf(values[0]),
+					"Progress: " + String.valueOf(values[1])
+						+ " tables done/Total=" + String.valueOf(values[0]),
 					Toast.LENGTH_SHORT).show();
 		
-	}
+	}//protected void onProgressUpdate(Integer... values) {
 
 }//public class Task_FixTableNameValue extends AsyncTask<String[], Integer, Integer>
