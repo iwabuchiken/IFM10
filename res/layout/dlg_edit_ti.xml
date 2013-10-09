@@ -87,6 +87,49 @@
                 android:lines="4" />
 
         </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" >
+
+            <TextView
+                android:id="@+id/dlg_edit_ti_tv_table_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="3dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/dlg_edit_ti_tv_table_name"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical" >
+
+                <!-- REF Multilines http://stackoverflow.com/questions/6674578/multiline-textview-in-android answered Jul 13 '11 at 5:59 -->
+
+                <TextView
+                    android:id="@+id/dlg_edit_ti_tv_table_name_value"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:layout_marginRight="5dp"
+                    android:editable="false"
+                    android:gravity="center_vertical"
+                    android:minLines="3"
+                    android:padding="3dp"
+                    android:text="@string/dlg_edit_ti_tv_table_name"
+                    android:textColor="@color/yello"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </TableRow>
+
     </TableLayout>
 
     <LinearLayout

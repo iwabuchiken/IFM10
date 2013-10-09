@@ -1627,6 +1627,11 @@ public class Methods_dlg {
 		
 		etMemos.setText(ti.getMemo());
 		
+		TextView tvTableName = (TextView) dlg2.findViewById(
+				R.id.dlg_edit_ti_tv_table_name_value);
+		
+		tvTableName.setText(ti.getTable_name());
+		
 //		// Log
 //		Log.d("Methods_dlg.java" + "["
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()

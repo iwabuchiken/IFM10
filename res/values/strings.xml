@@ -134,6 +134,7 @@
     	<string name="dlg_edit_ti_tv_file_name">File name</string>
     	<string name="dlg_edit_ti_tv_file_path">File path</string>
     	<string name="dlg_edit_ti_tv_memos">Memos</string>
+    	<string name="dlg_edit_ti_tv_table_name">Table name</string>
     	
     <!-- FTP -->
 
