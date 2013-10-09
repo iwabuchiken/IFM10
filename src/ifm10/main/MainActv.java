@@ -1,7 +1,5 @@
 package ifm10.main;
 
-
-
 import ifm10.adapters.MainListAdapter;
 import ifm10.listeners.CustomOnItemLongClickListener;
 import ifm10.listeners.button.ButtonOnClickListener;
@@ -33,6 +31,7 @@ import android.os.Looper;
 import android.os.Vibrator;
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -1358,6 +1357,8 @@ public class MainActv extends ListActivity {
 	@Override
 	protected void onStart() {
 		
+//		debugs();
+		
 //		setup_tablet();
 		
 		setup();
@@ -1381,15 +1382,16 @@ public class MainActv extends ListActivity {
 		
 //		debug_master_v3_2__CreateSubDirs();
 		
-		debug_master_v4_2__ChangeTableNames();
-//		debug_master_v4_2_e2_t1__RestoreDBFile();
+//		debug_master_v4_2__ChangeTableNames();
+		debug_master_v4_2_e2_t1__RestoreDBFile();
 		
 		
 	}//private void debugs() {
 
 	private void debug_master_v4_2_e2_t1__RestoreDBFile() {
 		
-		String src = "/mnt/sdcard-ext/IFM10_backup/ifm10_backup_20130620_165036.bk";
+//		String src = "/mnt/sdcard-ext/IFM10_backup/ifm10_backup_20130620_165036.bk";
+	String src = "/mnt/sdcard-ext/IFM10_backup/ifm10_backup_20130928_205859.bk";
 		String dst = StringUtils.join(new String[]{"/data/data/ifm10.main/databases", MainActv.dbName}, File.separator);
 		
 //		String dst = "/data/data/ifm9.main/databases" + MainActv.dbName;
