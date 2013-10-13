@@ -14,7 +14,9 @@ import ifm10.utils.CONS;
 import ifm10.utils.MethodsFTP;
 import ifm10.utils.Methods_IFM9;
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,10 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 	TI ti;
 	
 	boolean delete;
+	
+	String ftpTag;//=> Use this field for ftp_upload_db_file
+
+	Vibrator vib;
 	
 	public TaskFTP(Activity actv) {
 		
@@ -61,6 +67,8 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 	protected Integer
 	doInBackground(String... ftpTags) {
 		
+		vib = (Vibrator) actv.getSystemService(Context.VIBRATOR_SERVICE);
+		
 		// Log
 		Log.d("TaskFTP.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
@@ -76,7 +84,9 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 			
 		} else if (ftpTags[0].equals(actv.getString(R.string.ftp_upload_db_file))) {
 				
-				res = MethodsFTP.uploadDbFile(actv);
+			this.ftpTag = actv.getString(R.string.ftp_upload_db_file);
+			
+			res = MethodsFTP.uploadDbFile(actv);
 				
 		} else {//if (ftpTag.equals(actv.getString(R.string.ftp_lollipop)))
 			
@@ -106,6 +116,18 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 		Toast.makeText(actv,
 				"Result(FTP) => " + String.valueOf(res),
 				Toast.LENGTH_SHORT).show();
+		
+		/*********************************
+		 * Upload db file?
+		 *********************************/
+		if (this.ftpTag.equals(actv.getString(R.string.ftp_upload_db_file))) {
+			
+			_onPostExecute_UploadDbFile(res);
+			
+			return;
+			
+		}
+		
 		
 		/*********************************
 		 * Calling url: http://benfranklin.chips.jp/IFM10/create_thumbnails.php
@@ -242,6 +264,28 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 		}//if (res > 0 && ti != null) {
 			
 	}//protected void onPostExecute(String result)
+
+	private void _onPostExecute_UploadDbFile(Integer res) {
+		// TODO Auto-generated method stub
+		
+		vib.vibrate(CONS.Admin.vibLength_Long);
+		
+		if (res.intValue() > 0) {
+			
+			// debug
+			Toast.makeText(actv,
+					"Upload db => Done", Toast.LENGTH_SHORT).show();
+			
+		} else {//if (res.intValue() > 0)
+			
+			// debug
+			Toast.makeText(actv,
+					"Upload db => Failed", Toast.LENGTH_SHORT).show();
+			
+		}//if (res.intValue() > 0)
+		
+		
+	}//private void _onPostExecute_UploadDbFile(Integer res) {
 
 	private boolean
 	_onPostExecute__1_create_thumbnails() {

@@ -187,7 +187,43 @@ public class CONS {
 		
 		public static
 		String fname_log = "ifm10.log";
+
+		public static String
+		appName = "ifm10";
+		
+		public static final int
+		vibLength_Long = 100;
+		
 		
 	}//public static class Admin {
+
+	public static class FTP {
+		
+		public static String
+		serverName = "ftp.benfranklin.chips.jp";
+		
+		public static String
+		userName = "chips.jp-benfranklin";
+		
+		public static String
+		passWord = "9x9jh4";
+
+		public static String
+		dPath_remote_db = "android_app_data/IFM10";
+		
+	}//public static class FTP
+	
+	public static class DB {
+		
+		public static String
+		dPath_db = "/data/data/ifm10.main/databases";
+		
+		public static String
+		fName_db = "ifm9.db";
+		
+		
+		
+		
+	}//public static class DB {
 
 }

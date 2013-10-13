@@ -1383,10 +1383,32 @@ public class MainActv extends ListActivity {
 //		debug_master_v3_2__CreateSubDirs();
 		
 //		debug_master_v4_2__ChangeTableNames();
-		debug_master_v4_2_e2_t1__RestoreDBFile();
+//		debug_master_v4_2_e2_t1__RestoreDBFile();
 		
+		_debug_show_db_dir_list();
 		
 	}//private void debugs() {
+
+	private void _debug_show_db_dir_list() {
+		// TODO Auto-generated method stub
+		
+		File f = new File(CONS.DB.dPath_db);
+		
+		String[] fNames = f.list();
+		
+		for (String fName : fNames) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "fName=" + fName);
+			
+		}
+		
+	}
 
 	private void debug_master_v4_2_e2_t1__RestoreDBFile() {
 		

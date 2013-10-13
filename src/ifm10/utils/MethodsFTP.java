@@ -73,14 +73,14 @@ public class MethodsFTP {
 			reply_code = fp.getReplyCode();
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "fp.getReplyCode()=" + fp.getReplyCode());
 			
 		} catch (SocketException e) {
 			
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Error: " + e.toString());
 			
@@ -89,7 +89,7 @@ public class MethodsFTP {
 		} catch (IOException e) {
 
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Error: " + e.toString());
 			
@@ -191,7 +191,7 @@ public class MethodsFTP {
 			fp.disconnect();
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "fp => Disconnected");
 
@@ -200,7 +200,7 @@ public class MethodsFTP {
 		} catch (IOException e) {
 			
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Error: " + e.toString());
 			
@@ -245,14 +245,14 @@ public class MethodsFTP {
 			reply_code = fp.getReplyCode();
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "fp.getReplyCode()=" + fp.getReplyCode());
 			
 		} catch (SocketException e) {
 			
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Error: " + e.toString());
 			
@@ -261,7 +261,7 @@ public class MethodsFTP {
 		} catch (IOException e) {
 
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Error: " + e.toString());
 			
@@ -391,7 +391,7 @@ public class MethodsFTP {
 			fp.disconnect();
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "fp => Disconnected");
 
@@ -400,7 +400,7 @@ public class MethodsFTP {
 		} catch (IOException e) {
 			
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Error: " + e.toString());
 			
@@ -410,7 +410,12 @@ public class MethodsFTP {
 		
 	}//public static void ftp_connect_disconnect(Activity actv, TI ti)
 
-	
+	/*********************************
+	 * @return -1	=> SocketException, IOException in connecting,
+	 * 					logging in or disconnecting<br>
+	 * 			-2	=> Login failed<br>
+	 * 			Others	=> Reply code<br>
+	 *********************************/
 	public static int uploadDbFile(Activity actv) {
 		/*********************************
 		 * memo
@@ -428,8 +433,8 @@ public class MethodsFTP {
 		
 		String fpath = StringUtils.join(
 				new String[]{
-						MainActv.dirPath_db,
-						MainActv.fileName_db
+						CONS.DB.dPath_db,
+						CONS.DB.fName_db
 				}, File.separator);
 		
 		// Log
@@ -439,8 +444,16 @@ public class MethodsFTP {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "fpath=" + fpath);
 		
-		String fpath_remote = "./" + "ifm9." + String.valueOf(Methods.getMillSeconds_now())
-								+ ".db";
+		String fpath_remote =
+						"./"
+						+ CONS.FTP.dPath_remote_db
+						+ "/"
+						+ CONS.Admin.appName + "_"
+						+ String.valueOf(
+								Methods.get_TimeLabel(Methods.getMillSeconds_now()))
+						+ ".db";
+//						"./" + "ifm9." + String.valueOf(Methods.getMillSeconds_now())
+//						+ ".db";
 
 		// Log
 		Log.d("MethodsFTP.java" + "["
@@ -454,19 +467,20 @@ public class MethodsFTP {
 		 *********************************/
 		try {
 			
-			fp.connect(server_name);
+			fp.connect(CONS.FTP.serverName);
+//			fp.connect(server_name);
 			
 			reply_code = fp.getReplyCode();
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "fp.getReplyCode()=" + fp.getReplyCode());
 			
 		} catch (SocketException e) {
 			
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Error: " + e.toString());
 			
@@ -475,7 +489,7 @@ public class MethodsFTP {
 		} catch (IOException e) {
 
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Error: " + e.toString());
 			
@@ -489,7 +503,8 @@ public class MethodsFTP {
 		
 		try {
 			
-			res = fp.login(uname, passwd);
+			res = fp.login(CONS.FTP.userName, CONS.FTP.passWord);
+//			res = fp.login(uname, passwd);
 			
 			if(res == false) {
 				
@@ -517,6 +532,8 @@ public class MethodsFTP {
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			
+			return -1;
 		}
 		
 		/*********************************
@@ -581,7 +598,7 @@ public class MethodsFTP {
 			fp.disconnect();
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "fp => Disconnected");
 
@@ -590,7 +607,7 @@ public class MethodsFTP {
 		} catch (IOException e) {
 			
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("MethodsFTP.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Error: " + e.toString());
 			
