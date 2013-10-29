@@ -79,7 +79,15 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 		int res;
 		
 		if (ftpTags[0].equals(actv.getString(R.string.ftp_lollipop))) {
-
+			
+			// Log
+			Log.d("["
+					+ "TaskFTP.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Starting to upload => " + ti.getFile_name());
+			
 			res = MethodsFTP.ftp_connect_disconnect(actv, ti);
 			
 		} else if (ftpTags[0].equals(actv.getString(R.string.ftp_upload_db_file))) {
@@ -120,7 +128,9 @@ public class TaskFTP extends AsyncTask<String, Integer, Integer> {
 		/*********************************
 		 * Upload db file?
 		 *********************************/
-		if (this.ftpTag.equals(actv.getString(R.string.ftp_upload_db_file))) {
+		if (this.ftpTag != null &&
+				this.ftpTag.equals(
+						actv.getString(R.string.ftp_upload_db_file))) {
 			
 			_onPostExecute_UploadDbFile(res);
 			
