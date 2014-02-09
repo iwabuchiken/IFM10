@@ -990,6 +990,7 @@ public class TNActv extends ListActivity {
 				/*----------------------------
 				 * 2. If yes, show dialog
 					----------------------------*/
+//				Methods_dlg.dlg_ChooseMoveMode(this);
 				Methods_dlg.dlg_moveFiles(this);
 				
 			}//if (move_mode == false)

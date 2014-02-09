@@ -1,9 +1,11 @@
 package ifm10.main;
 
 import android.app.ListActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +36,7 @@ public class PrefActv extends PreferenceActivity {
 		addPreferencesFromResource(R.xml.preferences);
 		
 	}//public void onCreate(Bundle savedInstanceState)
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

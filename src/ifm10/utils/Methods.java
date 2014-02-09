@@ -2852,7 +2852,8 @@ public class Methods {
 		/*----------------------------
 		 * 1.2. Get target dir path from dlg2
 			----------------------------*/
-		TextView tv = (TextView) dlg2.findViewById(R.id.dlg_confirm_move_files_tv_table_name);
+		TextView tv = (TextView) dlg2.findViewById(
+							R.id.dlg_confirm_move_files_tv_table_name);
 		
 		String folderPath = tv.getText().toString();
 		

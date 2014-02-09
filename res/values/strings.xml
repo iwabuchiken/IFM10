@@ -144,6 +144,13 @@
     	<string name="http_post_file_name_lollipop">http_post_file_name_lollipop</string>
     	<string name="http_post_image_data_rails">http_post_image_data_rails</string>
     	
-    
-    
+    <!-- dlg_ChooseMoveMode -->
+    	<string name="dlg_ChooseMoveMode_InDevice">
+    	    			In device
+    	</string>
+    	
+    	<string name="dlg_ChooseMoveMode_ToRemote">
+    	    			To remote
+    	</string>
+    	
 </resources>

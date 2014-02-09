@@ -1531,6 +1531,62 @@ public class Methods_dlg {
 		dlg.show();
 
 	}//public static void dlg_TNList(Activity actv, TI ti)
+	
+	public static void
+	dlg_ChooseMoveMode(Activity actv) {
+		// TODO Auto-generated method stub
+		Dialog dlg = Methods_dlg.dlg_template_cancel(
+				actv, R.layout.dlg_db_admin, 
+				R.string.generic_tv_menu, 
+				R.id.dlg_db_admin_bt_cancel, 
+				Tags.DialogTags.dlg_generic_dismiss);
+		
+		/*----------------------------
+		 * 2. Prep => List
+		----------------------------*/
+		String[] choices = {
+				actv.getString(R.string.dlg_ChooseMoveMode_InDevice),
+				actv.getString(R.string.dlg_ChooseMoveMode_ToRemote)
+		};
+		
+		List<String> list = new ArrayList<String>();
+		
+		for (String item : choices) {
+			
+			list.add(item);
+			
+		}
+		
+		/*----------------------------
+		 * 3. Adapter
+		----------------------------*/
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+				actv,
+				//R.layout.dlg_db_admin,
+				android.R.layout.simple_list_item_1,
+				list
+				);
+		
+		/*----------------------------
+		 * 4. Set adapter
+		----------------------------*/
+		ListView lv = (ListView) dlg.findViewById(R.id.dlg_db_admin_lv);
+		
+		lv.setAdapter(adapter);
+		
+		/*----------------------------
+		 * 5. Set listener to list
+		----------------------------*/
+		lv.setTag(Tags.DialogItemTags.dlg_ChooseMoveMode);
+		
+		lv.setOnItemClickListener(new DialogOnItemClickListener(actv, dlg));
+		
+		/*----------------------------
+		 * 6. Show dialog
+		----------------------------*/
+		dlg.show();
+		
+	}//dlg_ChooseMoveMode(Activity actv)
 
 	public static void
 	dlg_confirm_DeleteTI(Activity actv, Dialog dlg1, TI ti) {
@@ -1764,8 +1820,11 @@ public class Methods_dlg {
 		 * 4. Add listeners => OnClick
 			----------------------------*/
 		//
-		btn_ok.setOnClickListener(new DialogButtonOnClickListener(actv, dlg1, dlg2, ti));
-		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg1, dlg2));
+		btn_ok.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, ti));
+		
+		btn_cancel.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2));
 		
 		/*----------------------------
 		 * 5. Show dialog

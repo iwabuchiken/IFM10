@@ -90,6 +90,9 @@ public class Tags {
 		// dlg_tn_list
 		dlg_tn_list,
 		
+		// dlg_ChooseMoveMode
+		dlg_ChooseMoveMode,
+		
 	}//public static enum DialogItemTags
 	
 	

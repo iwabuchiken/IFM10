@@ -257,6 +257,10 @@ public final class R {
         public static final int db_manager_btn_create_table=0x7f070025;
         public static final int db_manager_btn_drop_table=0x7f070026;
         public static final int db_manager_btn_register_patterns=0x7f070027;
+        /**  dlg_ChooseMoveMode 
+         */
+        public static final int dlg_ChooseMoveMode_InDevice=0x7f070053;
+        public static final int dlg_ChooseMoveMode_ToRemote=0x7f070054;
         public static final int dlg_add_memos_bt_patterns=0x7f07002d;
         /**  dlg_add_memos.xml 
          */
